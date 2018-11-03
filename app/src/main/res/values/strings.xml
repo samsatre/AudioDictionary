@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AudioDictionary</string>
+    <string name="addWord">Add Word</string>
+    <string name="wordToAdd">Word</string>
+    <string name="recordWord">Record Word</string>
+    <string name="addSentence">Sentence with Word</string>
 </resources>
