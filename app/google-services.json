@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "487961984549",
+    "firebase_url": "https://audiodictionary-6e49e.firebaseio.com",
+    "project_id": "audiodictionary-6e49e",
+    "storage_bucket": "audiodictionary-6e49e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487961984549:android:e088321ccbcbeabe",
+        "android_client_info": {
+          "package_name": "com.dictionary.audio.audiodictionary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "487961984549-92h38riato5qi5m5i5opsc7c87brkcqa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dictionary.audio.audiodictionary",
+            "certificate_hash": "67f0d2d7ec3ccfa93d715911bb2dd98c145593c6"
+          }
+        },
+        {
+          "client_id": "487961984549-gc4f59c7djbhsidv0o6p6ca70vgbtloq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPDwmmP6pa9JGUaBRWGlJDCODkBKMWi64"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "487961984549-gc4f59c7djbhsidv0o6p6ca70vgbtloq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
