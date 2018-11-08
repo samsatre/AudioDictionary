@@ -6,7 +6,7 @@
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Welcome to Audio Dictionary"
+        android:text="Welcome to Audio Dictionary v .2"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:textSize="30sp"
@@ -16,6 +16,7 @@
         android:id="@+id/testHomePref"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="testPref"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         />
@@ -23,6 +24,7 @@
         android:id="@+id/testHomeLearn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="testLearn"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         />
