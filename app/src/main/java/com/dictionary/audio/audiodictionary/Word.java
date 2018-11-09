@@ -38,4 +38,23 @@ public class Word {
         return result;
     }
 
+    public String getDefinition() {
+        return definition;
+    }
+
+    public List<String> getSentences() {
+        return sentences;
+    }
+
+    public Map<String, Integer> getRecordings() {
+        return recordings;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public String getWord() {
+        return word;
+    }
 }

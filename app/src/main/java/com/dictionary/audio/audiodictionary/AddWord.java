@@ -5,8 +5,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -15,15 +17,24 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 
 import static android.Manifest.permission.RECORD_AUDIO;
@@ -33,8 +44,8 @@ public class AddWord extends Activity {
 
     public static final int RequestPermissionCode = 1;
 
-    Button addWord, recordAudio, replayBtn, retryBtn;
-    EditText word, definition;
+    Button submit, recordAudio, replayBtn, retryBtn;
+    EditText word, definition, sentence;
     LinearLayout replay;
 
 
@@ -42,7 +53,10 @@ public class AddWord extends Activity {
     MediaRecorder mediaRecorder;
 
     String audioPath = null;
-    boolean recording;
+    String fileName = null;
+    String language = null;
+    Word wordData = null;
+    boolean recording, addNewRow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,36 +65,18 @@ public class AddWord extends Activity {
 
         word = (EditText) findViewById(R.id.word);
         definition = (EditText) findViewById(R.id.definition);
-        addWord = (Button) findViewById(R.id.submit);
+        sentence = (EditText) findViewById(R.id.sentence);
+        submit = (Button) findViewById(R.id.submit);
         recordAudio = (Button) findViewById(R.id.record);
         replay = (LinearLayout) findViewById(R.id.replay_view);
         replayBtn = (Button) findViewById(R.id.replay);
         retryBtn = (Button) findViewById(R.id.rerecord);
 
+
+        language = "English";
         recording = false;
         mediaRecorder = new MediaRecorder();
 
-        /*
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Words");
-
-        String uid = UUID.randomUUID().toString();
-        String word = "Computer";
-        List<String> sentences = new ArrayList<>();
-        Map<String, Integer> recordings = new HashMap<>();
-
-        sentences.add("A Computer was invented by Bill Gates");
-        sentences.add("Computers are very, very fast");
-        sentences.add("What started big but now are small are computers");
-        recordings.put("someUrlKey1", 3);
-        recordings.put("someUrlKey2", 9);
-        String definition = "Computers are..... fun";
-
-
-        Word post = new Word(uid, word, sentences, recordings, definition);
-
-        myRef.child("English").setValue(post);
-        */
 
         recordAudio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +88,10 @@ public class AddWord extends Activity {
                         recording = true;
                         Toast.makeText(AddWord.this, "Recording Started", Toast.LENGTH_SHORT).show();
 
-                        audioPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
-                                UUID.randomUUID().toString() + "AudioRecording.3gp";
+                        fileName = UUID.randomUUID().toString();
+                        fileName = fileName.replace("-", "0");
+                        audioPath = Environment.getExternalStorageDirectory().getAbsolutePath() +
+                                "/" + fileName;
 
                         MediaRecorderReady();
 
@@ -154,6 +152,81 @@ public class AddWord extends Activity {
             }
         });
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String w = word.getText().toString();
+                String d = definition.getText().toString();
+                String s = sentence.getText().toString();
+
+                if(w.length() == 0) {
+                    Toast.makeText(AddWord.this, "Please add a Word", Toast.LENGTH_LONG).show();
+                } else if (d.length() == 0) {
+                    Toast.makeText(AddWord.this, "Please add a Definition", Toast.LENGTH_LONG).show();
+                } else if (s.length() == 0) {
+                    Toast.makeText(AddWord.this, "Please add a Sentence", Toast.LENGTH_LONG).show();
+                } else if(audioPath == null) {
+                    Toast.makeText(AddWord.this, "Please add an Audio Recording", Toast.LENGTH_LONG).show();
+                } else {
+                    addNewRow = true;
+                    StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference(language);
+
+                    Uri file = Uri.fromFile(new File(audioPath));
+                    StorageReference riversRef = mStorageRef.child(language + "/" + fileName + ".3gp");
+
+                    Query queryRef = myRef.orderByChild("word").equalTo(w);
+
+                    queryRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                addNewRow = false;
+                                wordData = dataSnapshot.getValue(Word.class);
+                                // Fix this later
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) { }
+                    });
+
+                    if(addNewRow) {
+                        String uid = UUID.randomUUID().toString();
+                        Map<String, Integer> recordings = new HashMap<>();
+                        List<String> sentences = new ArrayList<>();
+                        sentences.add(s);
+
+                        recordings.put(fileName, 0);
+
+                        wordData = new Word(uid, w, sentences, recordings, d);
+
+                        myRef.child(w).setValue(wordData);
+                    } else {
+                        wordData.recordings.put(fileName, 0);
+                        wordData.sentences.add(s);
+
+                        myRef.child(w).setValue(wordData);
+                    }
+
+                    riversRef.putFile(file)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    // Get a URL to the uploaded content
+                                    Toast.makeText(AddWord.this, "Successful Upload", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    // Handle unsuccessful uploads
+                                    Toast.makeText(AddWord.this, "Failed to Upload. Please Try Again", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                }
+            }
+        });
     }
 
     public void MediaRecorderReady(){
@@ -163,7 +236,6 @@ public class AddWord extends Activity {
         mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
         mediaRecorder.setOutputFile(audioPath);
     }
-
 
     private void requestPermission() {
         ActivityCompat.requestPermissions(AddWord.this, new
@@ -202,5 +274,4 @@ public class AddWord extends Activity {
                 RECORD_AUDIO);
         return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
     }
-
 }

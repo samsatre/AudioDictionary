@@ -27,7 +27,7 @@
     <EditText
         android:id="@+id/definition"
         android:layout_width="fill_parent"
-        android:layout_height="150dp"
+        android:layout_height="80dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/colorPrimaryDark"
@@ -35,6 +35,20 @@
         android:fitsSystemWindows="true"
         android:gravity="top"
         android:hint="Definition"
+        android:inputType="textMultiLine"
+        android:padding="5dp"
+        android:singleLine="false" />
+
+    <EditText
+        android:id="@+id/sentence"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:breakStrategy="balanced"
+        android:fitsSystemWindows="true"
+        android:gravity="top"
+        android:hint="Sentence"
         android:inputType="textMultiLine"
         android:padding="5dp"
         android:singleLine="false" />
@@ -49,7 +63,7 @@
         android:elevation="4dp"
         android:paddingLeft="70dp"
         android:paddingRight="70dp"
-        android:text="Start Recording Audio"
+        android:text="@string/record_start"
         android:textColor="#fff" />
 
     <LinearLayout
@@ -93,4 +107,5 @@
         android:paddingRight="70dp"
         android:text="Submit"
         android:textColor="#fff" />
+
 </LinearLayout>
