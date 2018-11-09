@@ -6,6 +6,8 @@
     <string name="addSentence">Sentence with Word</string>
     <string name="chooseLearn">Language to Learn</string>
     <string name="choosePreferred">Preferred Language</string>
+    <string name="record_start">Start Recording Audio</string>
+    <string name="record_stop">Stop Recording Audio</string>
 
     <string-array name="learnArray">
         <item>Language to Learn</item>

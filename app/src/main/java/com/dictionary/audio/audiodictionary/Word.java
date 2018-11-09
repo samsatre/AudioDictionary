@@ -16,9 +16,7 @@ public class Word {
     public Map<String, Integer> recordings;
     public String definition;
 
-    public Word() {
-        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
-    }
+    public Word() { }
 
     public Word(String uid, String word, List<String> sentences, Map<String, Integer> recordings, String definition) {
         this.uid = uid;
