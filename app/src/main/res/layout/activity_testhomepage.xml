@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Welcome to Audio Dictionary v .2"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textSize="30sp"
+        />
+
+    <TextView
+        android:id="@+id/testHomePref"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="testPref"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        />
+    <TextView
+        android:id="@+id/testHomeLearn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="testLearn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        />
+
+
+</RelativeLayout>

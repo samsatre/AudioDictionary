@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/initPrefText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose preferred language"
+        android:layout_alignTop="@+id/initialSpinnerPreferred"
+        android:layout_marginLeft="100dp"
+        />
+    <TextView
+        android:id="@+id/initLearnText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose language you are learning"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/initialSpinnerLearn"
+    />
+
+    <Spinner
+        android:id="@+id/initialSpinnerLearn"
+        android:layout_width="220dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:entries="@array/learnArray"
+        android:prompt="@string/chooseLearn"
+        />
+
+    <Spinner
+        android:id="@+id/initialSpinnerPreferred"
+        android:layout_width="220dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:entries="@array/preferArray"
+        android:prompt="@string/choosePreferred"
+        />
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/initButtonAnchor"
+        />
+    <Button
+        android:id="@+id/initialSubmitButton"
+        android:text="Submit"
+        android:textSize="30dp"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_alignTop="@+id/initButtonAnchor"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="-60dp"
+
+        />
+
+</RelativeLayout>
