@@ -8,6 +8,7 @@
     <string name="choosePreferred">Preferred Language</string>
     <string name="record_start">Start Recording Audio</string>
     <string name="record_stop">Stop Recording Audio</string>
+    <string name="login_forgot"> <u>Forgot your password?</u> </string>
 
     <string-array name="learnArray">
         <item>Language to Learn</item>
