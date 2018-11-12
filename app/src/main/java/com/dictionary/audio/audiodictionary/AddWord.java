@@ -210,8 +210,10 @@ public class AddWord extends Activity {
                                 myRef.child(w).setValue(wordData);
                             } else {
                                 wordData.recordings.put(fileName, 0);
-                                wordData.sentences.add(s);
-                                wordData.definitions.add(d);
+                                if (!wordData.sentences.contains(s))
+                                    wordData.sentences.add(s);
+                                if (!wordData.definitions.contains(d))
+                                    wordData.definitions.add(d);
 
                                 myRef.child(w).setValue(wordData);
                             }
