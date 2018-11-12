@@ -9,8 +9,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +34,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -86,7 +90,8 @@ public class AddWord extends Activity {
 
                     if(checkPermission()) {
                         recording = true;
-                        Toast.makeText(AddWord.this, "Recording Started", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddWord.this, "Recording Started",
+                                Toast.LENGTH_SHORT).show();
 
                         fileName = UUID.randomUUID().toString();
                         fileName = fileName.replace("-", "0");
@@ -117,7 +122,8 @@ public class AddWord extends Activity {
                     mediaRecorder.stop();
 
                     recordAudio.setText(R.string.record_start);
-                    recordAudio.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                    recordAudio.setBackgroundColor
+                            (getResources().getColor(R.color.colorPrimaryDark, null));
                     recordAudio.setVisibility(View.GONE);
                     replay.setVisibility(View.VISIBLE);
                 }
@@ -155,75 +161,84 @@ public class AddWord extends Activity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String w = word.getText().toString();
-                String d = definition.getText().toString();
-                String s = sentence.getText().toString();
+                final String w = word.getText().toString();
+                final String d = definition.getText().toString();
+                final String s = sentence.getText().toString();
 
                 if(w.length() == 0) {
-                    Toast.makeText(AddWord.this, "Please add a Word", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddWord.this, "Please add a Word",
+                            Toast.LENGTH_LONG).show();
                 } else if (d.length() == 0) {
-                    Toast.makeText(AddWord.this, "Please add a Definition", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddWord.this, "Please add a Definition",
+                            Toast.LENGTH_LONG).show();
                 } else if (s.length() == 0) {
-                    Toast.makeText(AddWord.this, "Please add a Sentence", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddWord.this, "Please add a Sentence",
+                            Toast.LENGTH_LONG).show();
                 } else if(audioPath == null) {
-                    Toast.makeText(AddWord.this, "Please add an Audio Recording", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddWord.this, "Please add an Audio Recording",
+                            Toast.LENGTH_LONG).show();
                 } else {
                     addNewRow = true;
                     StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myRef = database.getReference(language);
+                    final DatabaseReference myRef = database.getReference(language);
 
-                    Uri file = Uri.fromFile(new File(audioPath));
-                    StorageReference riversRef = mStorageRef.child(language + "/" + fileName + ".3gp");
+                    final Uri file = Uri.fromFile(new File(audioPath));
+                    final StorageReference riversRef = mStorageRef.child
+                            (language + "/" + fileName + ".3gp");
 
-                    Query queryRef = myRef.orderByChild("word").equalTo(w);
-
-                    queryRef.addValueEventListener(new ValueEventListener() {
+                    DatabaseReference childRef = myRef.child(w);
+                    childRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                addNewRow = false;
-                                wordData = dataSnapshot.getValue(Word.class);
-                                // Fix this later
+                            Toast.makeText(AddWord.this,
+                                    "dataSnapshot exists: " + dataSnapshot.exists(),
+                                    Toast.LENGTH_LONG).show();
+
+                            if (!dataSnapshot.exists()) {
+                                String uid = UUID.randomUUID().toString();
+                                Map<String, Integer> recordings = new HashMap<>();
+                                List<String> sentences = new ArrayList<>();
+                                List<String> definitions = new ArrayList<>();
+
+                                sentences.add(s);
+                                definitions.add(d);
+                                recordings.put(fileName, 0);
+
+                                wordData = new Word(uid, w, sentences, recordings, definitions);
+
+                                myRef.child(w).setValue(wordData);
+                            } else {
+                                wordData.recordings.put(fileName, 0);
+                                wordData.sentences.add(s);
+                                wordData.definitions.add(d);
+
+                                myRef.child(w).setValue(wordData);
                             }
+
+                            riversRef.putFile(file)
+                                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            // Get a URL to the uploaded content
+                                            Toast.makeText(AddWord.this, "Successful Upload",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception exception) {
+                                            // Handle unsuccessful uploads
+                                            Toast.makeText(AddWord.this,
+                                                    "Failed to Upload. Please Try Again",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    });
                         }
+
                         @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) { }
+                        public void onCancelled(@NonNull DatabaseError databaseError) {  }
                     });
-
-                    if(addNewRow) {
-                        String uid = UUID.randomUUID().toString();
-                        Map<String, Integer> recordings = new HashMap<>();
-                        List<String> sentences = new ArrayList<>();
-                        sentences.add(s);
-
-                        recordings.put(fileName, 0);
-
-                        wordData = new Word(uid, w, sentences, recordings, d);
-
-                        myRef.child(w).setValue(wordData);
-                    } else {
-                        wordData.recordings.put(fileName, 0);
-                        wordData.sentences.add(s);
-
-                        myRef.child(w).setValue(wordData);
-                    }
-
-                    riversRef.putFile(file)
-                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    // Get a URL to the uploaded content
-                                    Toast.makeText(AddWord.this, "Successful Upload", Toast.LENGTH_LONG).show();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception exception) {
-                                    // Handle unsuccessful uploads
-                                    Toast.makeText(AddWord.this, "Failed to Upload. Please Try Again", Toast.LENGTH_LONG).show();
-                                }
-                            });
                 }
             }
         });
@@ -260,7 +275,8 @@ public class AddWord extends Activity {
                         recordAudio.performClick();
 
                     } else {
-                        Toast.makeText(AddWord.this,"Permission Denied",Toast.LENGTH_LONG).show();
+                        Toast.makeText(AddWord.this,"Permission Denied",
+                                Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
@@ -272,6 +288,7 @@ public class AddWord extends Activity {
                 WRITE_EXTERNAL_STORAGE);
         int result1 = ContextCompat.checkSelfPermission(getApplicationContext(),
                 RECORD_AUDIO);
-        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
+        return result == PackageManager.PERMISSION_GRANTED &&
+                result1 == PackageManager.PERMISSION_GRANTED;
     }
 }

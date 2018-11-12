@@ -14,16 +14,17 @@ public class Word {
     public String word;
     public List<String> sentences;
     public Map<String, Integer> recordings;
-    public String definition;
+    public List<String> definitions;
 
     public Word() { }
 
-    public Word(String uid, String word, List<String> sentences, Map<String, Integer> recordings, String definition) {
+    public Word(String uid, String word, List<String> sentences, Map<String, Integer> recordings,
+                List<String> definitions) {
         this.uid = uid;
         this.word = word;
         this.sentences = sentences;
         this.recordings = recordings;
-        this.definition = definition;
+        this.definitions = definitions;
     }
 
     @Exclude
@@ -33,13 +34,13 @@ public class Word {
         result.put("word", word);
         result.put("sentences", sentences);
         result.put("recordings", recordings);
-        result.put("definition", definition);
+        result.put("definition", definitions);
 
         return result;
     }
 
-    public String getDefinition() {
-        return definition;
+    public List<String> getDefinitions() {
+        return definitions;
     }
 
     public List<String> getSentences() {
