@@ -115,6 +115,7 @@ public class LoginActivity extends Activity {
                         toAdd.put("Password",signupPass.getText().toString());
                         toAdd.put("Username",signupUser.getText().toString());
                         accountRef.child(signupUser.getText().toString()).setValue(toAdd);
+                        signupDialog.dismiss();
                     }
                 });
                 signupDialog.show();
