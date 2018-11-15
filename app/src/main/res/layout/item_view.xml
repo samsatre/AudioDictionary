@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".ViewWord">
+
+    <TextView
+        android:id="@+id/translationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="monospace"
+        android:text="@string/translated"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:typeface="normal" />
+
+    <Button
+        android:id="@+id/playBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/Play" />
+
+    <TextView
+        android:id="@+id/sentenceText"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:text="@string/sentence1"
+        android:textAppearance="@android:style/TextAppearance.Holo"
+        tools:layout_marginTop="12dp" />
+</LinearLayout>
