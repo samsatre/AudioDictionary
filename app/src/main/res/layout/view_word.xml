@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/WordView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ViewWord">
+
+
+    <TextView
+        android:id="@+id/wordText"
+        android:layout_width="372dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="@string/currword"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:typeface="normal" />
+
+</LinearLayout>
