@@ -45,6 +45,7 @@ public class LoginActivity extends Activity {
         mLogin = findViewById(R.id.loginbutton);
         mSignup = findViewById(R.id.signupbutton);
         mForgot = findViewById(R.id.forgotPassword);
+        //Login code
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +54,7 @@ public class LoginActivity extends Activity {
                     MessageDigest md = MessageDigest.getInstance("MD5");
                     md.update(temppw.getBytes(),0,temppw.length());
                     hash = new BigInteger(1,md.digest()).toString();
+                    System.out.println("login hash: " + hash);
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     final DatabaseReference myRef = database.getReference("AccountData");
                     DatabaseReference childRef = myRef.child(mUser.getText().toString());
@@ -66,7 +68,7 @@ public class LoginActivity extends Activity {
                                 Toast.makeText(getApplicationContext(),
                                         "Username not found!",Toast.LENGTH_LONG).show();
 
-                            }else if(mPass.getText().toString().equals(account.Password)){
+                            }else if(hash.equals(account.Password)){
                                 Toast.makeText(getApplicationContext(),
                                         "Log in successful!",Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getApplicationContext(),
@@ -93,26 +95,34 @@ public class LoginActivity extends Activity {
                     childRef.addListenerForSingleValueEvent(postListener);
                 }catch(NoSuchAlgorithmException e){}
             }
-        });
+        });//End login code
 
         mSignup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
                 signupDialog = new Dialog(LoginActivity.this);
                 signupDialog.setContentView(R.layout.signup_popup);
                 signupUser = signupDialog.findViewById(R.id.signup_username);
                 signupEmail = signupDialog.findViewById(R.id.signup_email);
                 signupPass = signupDialog.findViewById(R.id.signup_password);
                 signupSubmit = signupDialog.findViewById(R.id.signup_submit_btn);
+
                 signupSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        String temppw = signupPass.getText().toString() + temp;
+                        try {
+                            MessageDigest md = MessageDigest.getInstance("MD5");
+                            md.update(temppw.getBytes(),0,temppw.length());
+                            hash = new BigInteger(1,md.digest()).toString();
+                        }catch(NoSuchAlgorithmException e){}
                         final FirebaseDatabase database = FirebaseDatabase.getInstance();
                         final DatabaseReference accountRef = database.getReference("AccountData");
                         //TODO check for prexisting accounts and other edge cases.
                         Map<String,String> toAdd = new HashMap<>();
+                        System.out.println("signup hash: " + hash);
                         toAdd.put("Email",signupEmail.getText().toString());
-                        toAdd.put("Password",signupPass.getText().toString());
+                        toAdd.put("Password",hash);
                         toAdd.put("Username",signupUser.getText().toString());
                         accountRef.child(signupUser.getText().toString()).setValue(toAdd);
                         signupDialog.dismiss();
