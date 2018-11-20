@@ -25,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log in Username"
+        android:text="Log in Email"
         android:textSize="20sp"
         android:textColor="@color/common_google_signin_btn_text_light"
         android:layout_alignTop="@id/username"
