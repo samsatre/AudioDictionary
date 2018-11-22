@@ -42,12 +42,12 @@ public class LoginActivity extends Activity {
     Button signupSubmit;
     Boolean canSignup = null;
     private FirebaseAuth mAuth;
-    private final Object signupLock = new Object();
+    FirebaseUser currentUser;
     protected void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
         if(currentUser == null){
 
             setContentView(R.layout.activity_login);
@@ -68,7 +68,9 @@ public class LoginActivity extends Activity {
                         md.update(temppw.getBytes(),0,temppw.length());
                         hash = new BigInteger(1,md.digest()).toString();
                         System.out.println("login hash: " + hash);
-                        mAuth.signInWithEmailAndPassword(mUser.getText().toString(),hash).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        mAuth.signInWithEmailAndPassword(mUser.getText().toString(),hash)
+                                .addOnCompleteListener(LoginActivity.this,
+                                        new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
@@ -76,8 +78,8 @@ public class LoginActivity extends Activity {
                                     FirebaseUser user = mAuth.getCurrentUser();
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Toast.makeText(LoginActivity.this, "Authentication failed: " + task.getException().toString(),
-                                            Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this,
+                                            "Authentication failed: ", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -109,15 +111,32 @@ public class LoginActivity extends Activity {
                             final DatabaseReference accountRef = database.getReference("AccountData");
                             String cleanedEmail = signupEmail.getText().toString().replaceAll("(\\.)",",");
                             DatabaseReference usernameRef = accountRef.child(signupUser.getText().toString());
-                            DatabaseReference emailRef = accountRef.child(cleanedEmail);
                             //TODO check for prexisting accounts and other edge cases.
+                            mAuth.createUserWithEmailAndPassword(signupEmail.getText().toString(),hash)
+                                    .addOnCompleteListener(LoginActivity.this,
+                                            new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                Map<String, String> toAdd = new HashMap<>();
-                                System.out.println("signup hash: " + hash);
-                                toAdd.put("Email", signupEmail.getText().toString());
-                                toAdd.put("Password", hash);
-                                toAdd.put("Username", signupUser.getText().toString());
-                                accountRef.child(signupUser.getText().toString()).setValue(toAdd);
+                                    if(task.isSuccessful()){
+
+                                        Toast.makeText(getApplicationContext(),"Signup successful!",
+                                                Toast.LENGTH_LONG).show();
+                                        currentUser = mAuth.getCurrentUser();
+                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                .setDisplayName(signupUser.getText().toString()).build();
+                                        currentUser.updateProfile(profileUpdates);
+                                        Intent initIntent = new Intent(getApplicationContext(),InitScreenActivity.class);
+                                        startActivity(initIntent);
+                                    } else {
+
+                                        Toast.makeText(getApplication(),"Signup failed!",Toast.LENGTH_LONG).show();
+
+
+                                    }
+                                }
+                            });
+
                             signupDialog.dismiss();
                         }
                     });
@@ -133,29 +152,23 @@ public class LoginActivity extends Activity {
         }
 
 
-
-
-
     }
 
     public static class Account {
 
-        public String Email;
-        public String Username;
-        public String Password;
+        public String photoURL;
+        public String displayName;
 
-        public Account(String Email, String Username, String Password){
+        public Account(String photoURL, String displayName){
 
-            this.Email = Email;
-            this.Username = Username;
-            this.Password = Password;
+            this.photoURL = photoURL;
+            this.displayName = displayName;
 
         }
         public Account(){
 
-            this.Email = null;
-            this.Username = null;
-            this.Password = null;
+            this.photoURL = null;
+            this.displayName = null;
 
         }
 
