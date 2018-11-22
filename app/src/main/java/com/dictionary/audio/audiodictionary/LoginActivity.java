@@ -76,6 +76,8 @@ public class LoginActivity extends Activity {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     FirebaseUser user = mAuth.getCurrentUser();
+                                    Intent initIntent = new Intent(getApplicationContext(),InitScreenActivity.class);
+                                    startActivity(initIntent);
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(LoginActivity.this,
@@ -126,8 +128,7 @@ public class LoginActivity extends Activity {
                                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                                 .setDisplayName(signupUser.getText().toString()).build();
                                         currentUser.updateProfile(profileUpdates);
-                                        Intent initIntent = new Intent(getApplicationContext(),InitScreenActivity.class);
-                                        startActivity(initIntent);
+
                                     } else {
 
                                         Toast.makeText(getApplication(),"Signup failed!",Toast.LENGTH_LONG).show();
@@ -147,7 +148,8 @@ public class LoginActivity extends Activity {
 
         } else{
 
-
+            Intent initIntent = new Intent(getApplicationContext(),InitScreenActivity.class);
+            startActivity(initIntent);
 
         }
 
