@@ -1,6 +1,7 @@
 package com.dictionary.audio.audiodictionary;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -65,6 +66,9 @@ public class AddWord extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent startingIntent = getIntent();
+
         setContentView(R.layout.activity_addword);
 
         word = (EditText) findViewById(R.id.word);
@@ -77,9 +81,15 @@ public class AddWord extends Activity {
         retryBtn = (Button) findViewById(R.id.rerecord);
 
 
-        language = "English";
+//        language = "English";
+        language = startingIntent.getStringExtra("language");
         recording = false;
         mediaRecorder = new MediaRecorder();
+
+        String wordFromIntent = startingIntent.getStringExtra("word");
+        if (wordFromIntent != null) {
+            word.setText(wordFromIntent);
+        }
 
 
         recordAudio.setOnClickListener(new View.OnClickListener() {
@@ -236,6 +246,7 @@ public class AddWord extends Activity {
                                                     Toast.LENGTH_LONG).show();
                                         }
                                     });
+                            finish();
                         }
 
                         @Override

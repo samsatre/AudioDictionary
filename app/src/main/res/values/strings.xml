@@ -13,6 +13,10 @@
     <string name="translated">Translation</string>
     <string name="Play">PlayBtn</string>
     <string name="sentence1">sentence</string>
+    <string name="queryInNative">Word in Native Language</string>
+    <string name="queryInLearning">Word in Learning Language</string>
+    <string name="searchTitle">Search for Word</string>
+    <string name="noResults">No Results Found</string>
 
     <string-array name="learnArray">
         <item>Language to Learn</item>
