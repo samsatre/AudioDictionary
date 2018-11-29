@@ -1,6 +1,7 @@
 package com.dictionary.audio.audiodictionary;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -62,6 +63,13 @@ public class SearchActivity extends Activity {
         firebaseDatabase = FirebaseDatabase.getInstance();
        // nativeDatabaseReference = firebaseDatabase.getReference(nativeLanguage);
        // learningDatabaseReference = firebaseDatabase.getReference(learningLanguage);
+
+        Intent searchIntent = getIntent();
+        if (searchIntent != null && searchIntent.hasExtra(SearchManager.QUERY)) {
+            String search = searchIntent.getStringExtra(SearchManager.QUERY);
+            learningSearch.setQuery(search, true);
+            querySearched(search, learningLanguage);
+        }
 
         nativeSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

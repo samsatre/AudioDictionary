@@ -18,14 +18,14 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        TextView encourageView = findViewById(R.id.encourageText);
+       // TextView encourageView = findViewById(R.id.encourageText);
         Button contributeButton = findViewById(R.id.contributeButton);
         Button searchButton = findViewById(R.id.searchButton);
-        Button flashButton = findViewById(R.id.flashButton);
-        encourageView.setText(ENCOURAGE_MSG);
+       // Button flashButton = findViewById(R.id.flashButton);
+       // encourageView.setText(ENCOURAGE_MSG);
         contributeButton.setText(CONTRIBUTE_TXT);
         searchButton.setText(SEARCH_TXT);
-        flashButton.setText(FLASH_TXT);
+       // flashButton.setText(FLASH_TXT);
 
     }
 

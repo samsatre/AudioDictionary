@@ -30,14 +30,14 @@ public class HomeScreenActivity extends Activity {
 
         addWordButton = findViewById(R.id.contributeButton);
         searchButton = findViewById(R.id.searchButton);
-        flashButton = findViewById(R.id.flashButton);
+        //flashButton = findViewById(R.id.flashButton);
         stat_msg = findViewById(R.id.statText);
 
         mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
         mEdit = mSp.edit();
 
         int wordsAddedCount = mSp.getInt(STATE_ADDED, 0);
-        stat_msg.setText(R.string.stat_msg1 + wordsAddedCount + R.string.stat_msg2);
+       // stat_msg.setText(R.string.stat_msg1 + wordsAddedCount + R.string.stat_msg2);
 
         addWordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +72,7 @@ public class HomeScreenActivity extends Activity {
         mEdit = mSp.edit();
 
         int wordsAddedCount = mSp.getInt(STATE_ADDED, 0);
-        stat_msg.setText(R.string.stat_msg1 + wordsAddedCount + R.string.stat_msg2);
+       // stat_msg.setText(R.string.stat_msg1 + wordsAddedCount + R.string.stat_msg2);
 
     }
 

@@ -34,7 +34,7 @@ public class InitScreenActivity extends Activity {
             //Pass to next activity
             String loadLearn = mSp.getString(STATE_LEARN,"Not found");
             String loadPrefer = mSp.getString(STATE_PREFERRED,"not found preferred");
-            Intent nextIntent = new Intent(getApplicationContext(),HomeScreenActivity.class);
+            Intent nextIntent = new Intent(getApplicationContext(), HomeScreenActivity.class);
             nextIntent.putExtra(STATE_LEARN, loadLearn);
             nextIntent.putExtra(STATE_PREFERRED,loadPrefer);
             startActivity(nextIntent);
