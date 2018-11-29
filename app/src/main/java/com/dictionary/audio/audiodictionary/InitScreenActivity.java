@@ -76,7 +76,7 @@ public class InitScreenActivity extends Activity {
                         mEdit.putString(STATE_PREFERRED,mPreferSpin.getSelectedItem().toString());
                         mEdit.commit();
                         //From here we will go to the next activity.
-                        Intent nextIntent = new Intent(getApplicationContext(),TestHomePageActivity.class);
+                        Intent nextIntent = new Intent(getApplicationContext(),HomeScreenActivity.class);
                         nextIntent.putExtra(STATE_LEARN, mLearnSpin.getSelectedItem().toString());
                         nextIntent.putExtra(STATE_PREFERRED,mPreferSpin.getSelectedItem().toString());
                         startActivity(nextIntent);

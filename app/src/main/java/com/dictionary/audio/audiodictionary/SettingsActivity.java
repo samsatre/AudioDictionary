@@ -12,6 +12,7 @@ public class SettingsActivity extends Activity {
     private final String SEARCH_TXT = "Search New Words";
     private final String FLASH_TXT = "Flash Cards";
 
+    @Override
     protected void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
