@@ -32,6 +32,8 @@ public class SearchActivity extends Activity {
     private String learningLanguage = null;
     private String nativeLanguage = null;
 
+    private String language;
+
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private DatabaseReference nativeDatabaseReference, learningDatabaseReference;
@@ -68,14 +70,16 @@ public class SearchActivity extends Activity {
         if (searchIntent != null && searchIntent.hasExtra(SearchManager.QUERY)) {
             String search = searchIntent.getStringExtra(SearchManager.QUERY);
             learningSearch.setQuery(search, true);
-            querySearched(search, learningLanguage);
+            language = learningLanguage + "-" + nativeLanguage;
+            querySearched(search, language);
         }
 
         nativeSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 nativeSearch.clearFocus();
-                querySearched(s, nativeLanguage);
+                language = nativeLanguage + "-" + learningLanguage;
+                querySearched(s, language);
                 return true;
             }
 
@@ -89,7 +93,8 @@ public class SearchActivity extends Activity {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 learningSearch.clearFocus();
-                querySearched(s, learningLanguage);
+                language = learningLanguage + "-" + nativeLanguage;
+                querySearched(s, language);
                 return true;
             }
 
