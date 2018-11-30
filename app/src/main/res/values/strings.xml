@@ -42,6 +42,19 @@
         <item>Spanish</item>
         <item>French</item>
     </string-array>
+
+    <string-array name="translateFrom">
+        <item>Translate From</item>
+        <item>English</item>
+        <item>Spanish</item>
+        <item>French</item>
+    </string-array>
+    <string-array name="translateTo">
+        <item>Translate To</item>
+        <item>English</item>
+        <item>Spanish</item>
+        <item>French</item>
+    </string-array>
     <string name="title_activity_view_word">ViewWord</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"

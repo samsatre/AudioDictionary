@@ -15,6 +15,33 @@
         android:textColor="#ce3232"
         android:textSize="40sp"
         android:typeface="serif" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Spinner
+            android:entries="@array/translateFrom"
+            android:id="@+id/translateFrom"
+            android:layout_weight=".5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:src="@drawable/ic_arrow_forward_black_24dp" />
+
+        <Spinner
+            android:entries="@array/translateTo"
+            android:id="@+id/translateTo"
+            android:layout_weight=".5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/word"
@@ -34,7 +61,7 @@
         android:breakStrategy="balanced"
         android:fitsSystemWindows="true"
         android:gravity="top"
-        android:hint="Definition"
+        android:hint="Translation"
         android:inputType="textMultiLine"
         android:padding="5dp"
         android:singleLine="false" />
