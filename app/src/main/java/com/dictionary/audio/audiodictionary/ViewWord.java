@@ -62,7 +62,7 @@ public class ViewWord extends ListActivity {
         List a = new ArrayList();
         List<String> sentences = dataSnapshot.child(word).getValue(Word.class).getSentences();
         List<String> definitions = dataSnapshot.child(word).getValue(Word.class).getDefinitions();
-        Map recordings = dataSnapshot.child(word).getValue(Word.class).getRecordings();
+        List<Pair<String, Integer>> recordings = dataSnapshot.child(word).getValue(Word.class).getRecordings();
         //Word my_word = new Word("1",word,sentences,recordings,definitions);
 
         //here on shouldn't have to change
@@ -70,10 +70,13 @@ public class ViewWord extends ListActivity {
         int i = 0;
         for (String s : sentences) {
             //items.add(new Item(s,(int)recordings.get("rec".concat(Integer.toString(i))),definitions.get(i)));
+            Pair<String, Integer> pair = recordings.get(i);
             String def = definitions.get(i);
-            items.add(new Item(s,i,def));
+            items.add(new Item(s,i,def, pair.getFirst()));
             i++;
         }
+
+
         mAdapter = new ViewListAdapter(this, items);
         //inflate header
         View headerView = findViewById(R.id.WordView);

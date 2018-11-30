@@ -13,12 +13,13 @@ public class Word {
     public String uid;
     public String word;
     public List<String> sentences;
-    public Map<String, Integer> recordings;
+    //public Map<String, Integer> recordings;
+    public List<Pair<String, Integer>> recordings;
     public List<String> definitions;
 
     public Word() { }
 
-    public Word(String uid, String word, List<String> sentences, Map<String, Integer> recordings,
+    public Word(String uid, String word, List<String> sentences, List<Pair<String, Integer>> recordings, //Map<String, Integer> recordings,
                 List<String> definitions) {
         this.uid = uid;
         this.word = word;
@@ -47,7 +48,12 @@ public class Word {
         return sentences;
     }
 
+    /*
     public Map<String, Integer> getRecordings() {
+        return recordings;
+    }*/
+
+    public List<Pair<String, Integer>> getRecordings() {
         return recordings;
     }
 

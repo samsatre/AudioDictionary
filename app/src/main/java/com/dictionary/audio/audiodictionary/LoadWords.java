@@ -2,7 +2,6 @@ package com.dictionary.audio.audiodictionary;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -73,6 +72,7 @@ public class LoadWords extends Activity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     //readData(dataSnapshot);
+                    System.out.println();
                     new LoadRV(dataSnapshot, language).execute();
 
                 } else {
@@ -98,7 +98,7 @@ public class LoadWords extends Activity {
             String uid = current.getValue(Word.class).getUid();
             List<String> sentences = current.getValue(Word.class).getSentences();
             List<String> definitions = current.getValue(Word.class).getDefinitions();
-            Map<String, Integer> recordings = current.getValue(Word.class).getRecordings();
+            List<Pair<String, Integer>> recordings = current.getValue(Word.class).getRecordings();
 
             w = new Word(uid, word, sentences, recordings, definitions);
             words.add(w);
@@ -164,11 +164,12 @@ public class LoadWords extends Activity {
             int maxRating = -1;
             final Word word = words.get(position);
 
-            for (String s: word.getRecordings().keySet()){
-                int rating = word.getRecordings().get(s);
+            for (Pair<String, Integer> p: word.getRecordings()){
+
+                int rating = p.getSecond();
                 if(rating > maxRating) {
                     maxRating = rating;
-                    recording = s;
+                    recording = p.getFirst();
                 }
             }
 

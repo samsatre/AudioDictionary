@@ -254,13 +254,15 @@ public class AddWord extends Activity {
 
                             if (!dataSnapshot.exists()) {
                                 String uid = UUID.randomUUID().toString();
-                                Map<String, Integer> recordings = new HashMap<>();
+                                //Map<String, Integer> recordings = new HashMap<>();
+                                List<Pair<String, Integer>> recordings = new ArrayList<>();
                                 List<String> sentences = new ArrayList<>();
                                 List<String> definitions = new ArrayList<>();
 
                                 sentences.add(s);
                                 definitions.add(d);
-                                recordings.put(fileName, 0);
+                                //recordings.put(fileName, 0);
+                                recordings.add(new Pair<String, Integer>(fileName, 0));
 
                                 wordData = new Word(uid, w, sentences, recordings, definitions);
 
@@ -270,11 +272,11 @@ public class AddWord extends Activity {
                                         (String) dataSnapshot.child("uid").getValue(),
                                         (String) dataSnapshot.child("word").getValue(),
                                         (List<String>) dataSnapshot.child("sentences").getValue(),
-                                        (Map<String,Integer>) dataSnapshot.child("recordings").getValue(),
+                                        (List<Pair<String, Integer>>) dataSnapshot.child("recordings").getValue(),
                                         (List<String>) dataSnapshot.child("definitions").getValue()
                                 );
 
-                                wordData.recordings.put(fileName, 0);
+                                wordData.recordings.add(new Pair<String, Integer>(fileName, 0));
                                 if (!wordData.sentences.contains(s))
                                     wordData.sentences.add(s);
                                 if (!wordData.definitions.contains(d))

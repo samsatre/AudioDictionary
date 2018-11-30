@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.*;
 
@@ -29,9 +31,15 @@ public class ViewListAdapter extends ArrayAdapter {
         TextView tvTranslation = (TextView) convertView.findViewById(R.id.translationText);
         TextView tvSentence = (TextView) convertView.findViewById(R.id.sentenceText);
         Button btnPlay =(Button) convertView.findViewById(R.id.playBtn);
+        ImageView upvote = (ImageView) convertView.findViewById(R.id.upVote);
+        ImageView downvote = (ImageView) convertView.findViewById(R.id.downVote);
         // Populate the data into the template view using the data object
         tvTranslation.setText(my_item.definition);
         tvSentence.setText(my_item.sentence);
+
+        System.out.println(my_item.getRecordingId() + " ******* RECORDING");
+        System.out.println(my_item.getDefinition() + " ******* RECORDING");
+
         // Return the completed view to render on screen
         return convertView;
     }
