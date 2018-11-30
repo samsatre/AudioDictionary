@@ -191,12 +191,9 @@ public class LoadWords extends Activity {
                         localFile .createNewFile();
                         songsRef.getFile(localFile);
 
-                        System.out.println("******************* IM HERE 2" + songsRef.getName());
-
                         mediaPlayer = new MediaPlayer();
                         mediaPlayer.setDataSource(localFile.getAbsolutePath());
                         mediaPlayer.prepare();
-                        System.out.println("******************* IM HERE 3");
                         mediaPlayer.start();
 
                         Toast.makeText(LoadWords.this, "Recording Playing",

@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -53,6 +54,7 @@ public class AddWord extends Activity {
 
     Button submit, recordAudio, replayBtn, retryBtn;
     EditText word, definition, sentence;
+    Spinner translateTo, translateFrom;
     LinearLayout replay;
 
 
@@ -86,14 +88,33 @@ public class AddWord extends Activity {
         replay = (LinearLayout) findViewById(R.id.replay_view);
         replayBtn = (Button) findViewById(R.id.replay);
         retryBtn = (Button) findViewById(R.id.rerecord);
+        translateFrom = (Spinner) findViewById(R.id.translateFrom);
+        translateTo = (Spinner) findViewById(R.id.translateTo);
 
         mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
         mEdit = mSp.edit();
 
 
 //        language = "English";
-        language = startingIntent.getStringExtra("language");
+//        language = startingIntent.getStringExtra("language");
 
+        translateFrom.setSelection(1);
+        translateFrom.setSelection(2);
+
+        String[] options = getResources().getStringArray(R.array.translateFrom);
+
+        int toIndex = 0, fromIndex = 0;
+
+        for(int i=0; i<options.length; i++){
+
+            if (options[i].equalsIgnoreCase(mSp.getString("learn", "English")))
+                toIndex = i;
+            if (options[i].equalsIgnoreCase(mSp.getString("preferred", "English")))
+                fromIndex = i;
+        }
+
+        translateFrom.setSelection(fromIndex);
+        translateTo.setSelection(toIndex);
 
         recording = false;
         mediaRecorder = new MediaRecorder();
@@ -208,8 +229,13 @@ public class AddWord extends Activity {
                 } else if(audioPath == null) {
                     Toast.makeText(AddWord.this, "Please add an Audio Recording",
                             Toast.LENGTH_LONG).show();
+                } else if (translateTo.getSelectedItem().toString().equalsIgnoreCase("Translate To")
+                        || translateFrom.getSelectedItem().toString().equalsIgnoreCase("Translate From")) {
+                    Toast.makeText(AddWord.this, "Please Select Languages",
+                            Toast.LENGTH_LONG).show();
                 } else {
                     addNewRow = true;
+                    language = translateFrom.getSelectedItem().toString() + "-" + translateTo.getSelectedItem().toString();
                     StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     final DatabaseReference myRef = database.getReference(language);

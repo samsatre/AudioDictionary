@@ -42,8 +42,6 @@ public class HomeScreenActivity extends Activity {
         addWordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(getIntent().getStringExtra("preferred") + "((((********");
-
                 Intent nextIntent = new Intent(getApplicationContext(), AddWord.class);
                 startActivity(nextIntent);
 
@@ -53,7 +51,6 @@ public class HomeScreenActivity extends Activity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent nextIntent = new Intent(getApplicationContext(), SearchActivity.class);
                 startActivity(nextIntent);
 
