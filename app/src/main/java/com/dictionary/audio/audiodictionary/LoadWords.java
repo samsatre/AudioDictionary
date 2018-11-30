@@ -166,8 +166,8 @@ public class LoadWords extends Activity {
 
             for (String s: word.getRecordings().keySet()){
                 int rating = word.getRecordings().get(s);
-
                 if(rating > maxRating) {
+                    maxRating = rating;
                     recording = s;
                 }
             }
@@ -226,10 +226,7 @@ public class LoadWords extends Activity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-
-
             words = readData(dataSnapshot);
-
             return null;
         }
 
