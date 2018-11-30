@@ -1,15 +1,16 @@
 package com.dictionary.audio.audiodictionary;
 
-class Item {
+class Item implements Comparable<Item> {
     String sentence;
-    int recording;
+    int recording, votes;
     String definition, recordingId;
 
-    public Item(String sentence, int recording, String definition, String recordingId) {
+    public Item(String sentence, int recording, int votes, String definition, String recordingId) {
         this.sentence = sentence;
         this.recording = recording;
         this.definition = definition;
         this.recordingId = recordingId;
+        this.votes = votes;
     }
 
     public String getSentence() {
@@ -32,6 +33,10 @@ class Item {
         this.sentence = sentence;
     }
 
+    public int getVotes() {
+        return votes;
+    }
+
     public void setRecording(int recording) {
         this.recording = recording;
     }
@@ -42,5 +47,10 @@ class Item {
 
     public void setDefinition(String definition) {
         this.definition = definition;
+    }
+
+    @Override
+    public int compareTo(Item o) {
+        return o.recording - this.recording;
     }
 }

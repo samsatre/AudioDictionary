@@ -33,7 +33,7 @@ public class ViewWord extends ListActivity {
         // String tableName = "English";
         // word = "water";
 
-        String tableName = intent.getStringExtra("language");
+        final String tableName = intent.getStringExtra("language");
         word = intent.getStringExtra("word");
 
         mBase = FirebaseDatabase.getInstance().getReference();
@@ -46,7 +46,7 @@ public class ViewWord extends ListActivity {
         mTable.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        readData(dataSnapshot);
+                        readData(dataSnapshot, tableName);
                     }
 
                     @Override
@@ -56,7 +56,7 @@ public class ViewWord extends ListActivity {
 
     }
 
-    private void readData(DataSnapshot dataSnapshot){
+    private void readData(DataSnapshot dataSnapshot, String language){
         //word = dataSnapshot.child(word).getValue(Word.class).getWord();
 
         List a = new ArrayList();
@@ -72,12 +72,13 @@ public class ViewWord extends ListActivity {
             //items.add(new Item(s,(int)recordings.get("rec".concat(Integer.toString(i))),definitions.get(i)));
             Pair<String, Integer> pair = recordings.get(i);
             String def = definitions.get(i);
-            items.add(new Item(s,i,def, pair.getFirst()));
+            items.add(new Item(s, i, pair.getSecond(),def, pair.getFirst()));
             i++;
         }
 
+        Collections.sort(items);
 
-        mAdapter = new ViewListAdapter(this, items);
+        mAdapter = new ViewListAdapter(this, items, language, word);
         //inflate header
         View headerView = findViewById(R.id.WordView);
 
