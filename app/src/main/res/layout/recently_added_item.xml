@@ -11,31 +11,45 @@
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="275dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginEnd="3dp"
         android:padding="3dp"
         card_view:cardCornerRadius="5dp">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/cardview_light_background">
-
-            <ImageView
-                android:id="@+id/flag_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/language_name"
-                android:textSize="30sp"
-                android:padding="7dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:id="@+id/wordText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:gravity="center"
+                android:text="Word"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/definitionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Definition"
+                android:textSize="17sp" />
 
         </LinearLayout>
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_gravity="end"
+                android:id="@+id/speaker"
+                android:src="@drawable/speaker" />
+
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
