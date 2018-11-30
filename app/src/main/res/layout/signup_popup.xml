@@ -26,6 +26,16 @@
         android:layout_marginBottom="-65dp"
         android:background="@drawable/loginedittextborder"
         />
+
+    <EditText
+        android:id="@+id/signup_confirm_password"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="104dp"
+        android:background="@drawable/loginedittextborder"
+        android:inputType="textWebPassword" />
     <EditText
         android:id="@+id/signup_email"
         android:layout_width="320dp"
@@ -65,6 +75,16 @@
         android:layout_alignLeft="@id/signup_password"
         android:layout_marginTop="-25dp"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Password"
+        android:textSize="20sp"
+        android:textColor="@color/common_google_signin_btn_text_light"
+        android:layout_alignTop="@id/signup_confirm_password"
+        android:layout_alignLeft="@id/signup_confirm_password"
+        android:layout_marginTop="-25dp"
+        />
     <View
         android:id="@+id/anchorSignup"
         android:layout_width="20dp"
@@ -87,10 +107,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="121dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="47dp"
         android:text="Submit"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
 
 </RelativeLayout>

@@ -38,6 +38,7 @@ public class LoginActivity extends Activity {
     EditText signupUser;
     EditText signupPass;
     EditText signupEmail;
+    EditText confirmPass;
     Dialog signupDialog;
     Button signupSubmit;
     Boolean canSignup = null;
@@ -99,46 +100,55 @@ public class LoginActivity extends Activity {
                     signupEmail = signupDialog.findViewById(R.id.signup_email);
                     signupPass = signupDialog.findViewById(R.id.signup_password);
                     signupSubmit = signupDialog.findViewById(R.id.signup_submit_btn);
+                    confirmPass = signupDialog.findViewById(R.id.signup_confirm_password);
 
                     signupSubmit.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String temppw = signupPass.getText().toString() + temp;
-                            try {
-                                MessageDigest md = MessageDigest.getInstance("SHA-256");
-                                md.update(temppw.getBytes(),0,temppw.length());
-                                hash = new BigInteger(1,md.digest()).toString();
-                            }catch(NoSuchAlgorithmException e){}
-                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            final DatabaseReference accountRef = database.getReference("AccountData");
-                            String cleanedEmail = signupEmail.getText().toString().replaceAll("(\\.)",",");
-                            DatabaseReference usernameRef = accountRef.child(signupUser.getText().toString());
-                            //TODO check for prexisting accounts and other edge cases.
-                            mAuth.createUserWithEmailAndPassword(signupEmail.getText().toString(),hash)
-                                    .addOnCompleteListener(LoginActivity.this,
-                                            new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(!signupPass.getText().toString().equals(confirmPass.getText().toString())){
 
-                                    if(task.isSuccessful()){
+                                Toast.makeText(getApplicationContext(),
+                                        "Passwords do not match!",Toast.LENGTH_LONG).show();
 
-                                        Toast.makeText(getApplicationContext(),"Signup successful!",
-                                                Toast.LENGTH_LONG).show();
-                                        currentUser = mAuth.getCurrentUser();
-                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                                .setDisplayName(signupUser.getText().toString()).build();
-                                        currentUser.updateProfile(profileUpdates);
-
-                                    } else {
-
-                                        Toast.makeText(getApplication(),"Signup failed!",Toast.LENGTH_LONG).show();
-
-
-                                    }
+                            } else {
+                                String temppw = signupPass.getText().toString() + temp;
+                                try {
+                                    MessageDigest md = MessageDigest.getInstance("SHA-256");
+                                    md.update(temppw.getBytes(), 0, temppw.length());
+                                    hash = new BigInteger(1, md.digest()).toString();
+                                } catch (NoSuchAlgorithmException e) {
                                 }
-                            });
+                                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                final DatabaseReference accountRef = database.getReference("AccountData");
+                                String cleanedEmail = signupEmail.getText().toString().replaceAll("(\\.)", ",");
+                                DatabaseReference usernameRef = accountRef.child(signupUser.getText().toString());
+                                //TODO check for prexisting accounts and other edge cases.
+                                mAuth.createUserWithEmailAndPassword(signupEmail.getText().toString(), hash)
+                                        .addOnCompleteListener(LoginActivity.this,
+                                                new OnCompleteListener<AuthResult>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                            signupDialog.dismiss();
+                                                        if (task.isSuccessful()) {
+
+                                                            Toast.makeText(getApplicationContext(), "Signup successful!",
+                                                                    Toast.LENGTH_LONG).show();
+                                                            currentUser = mAuth.getCurrentUser();
+                                                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                                    .setDisplayName(signupUser.getText().toString()).build();
+                                                            currentUser.updateProfile(profileUpdates);
+
+                                                        } else {
+
+                                                            Toast.makeText(getApplication(), "Signup failed!", Toast.LENGTH_LONG).show();
+
+
+                                                        }
+                                                    }
+                                                });
+
+                                signupDialog.dismiss();
+                            }
                         }
                     });
                     signupDialog.show();
