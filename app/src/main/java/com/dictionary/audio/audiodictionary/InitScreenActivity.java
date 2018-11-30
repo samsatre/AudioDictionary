@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+/*
+If user hasnt already set prefs, this screen allows the user to do so.
+ */
 
 public class InitScreenActivity extends Activity {
 
@@ -74,6 +77,7 @@ public class InitScreenActivity extends Activity {
                         //Save user choices
                         mEdit.putString(STATE_LEARN, mLearnSpin.getSelectedItem().toString());
                         mEdit.putString(STATE_PREFERRED,mPreferSpin.getSelectedItem().toString());
+
                         mEdit.commit();
                         //From here we will go to the next activity.
                         Intent nextIntent = new Intent(getApplicationContext(),HomeScreenActivity.class);

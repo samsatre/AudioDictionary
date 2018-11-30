@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,30 +26,32 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
-
+/*
+User can signup (signup leads to successful login), login, or request a "forgotten password".
+Usually goes to the "init activity" as the next screen, unless the user has already set this data.
+ */
 public class LoginActivity extends Activity {
 
-    private final String temp = "f8i:^%x%ux)g)s$=5zhn?j8:e,%t_{^[.";
     EditText mUser;
     EditText mPass;
     Button mLogin;
     Button mSignup;
     TextView mForgot;
-    String hash;
     EditText signupUser;
     EditText signupPass;
     EditText signupEmail;
     EditText confirmPass;
     Dialog signupDialog;
     Button signupSubmit;
-    Boolean canSignup = null;
     private FirebaseAuth mAuth;
     FirebaseUser currentUser;
     protected void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        mAuth.signOut();
         currentUser = mAuth.getCurrentUser();
+
         if(currentUser == null){
 
             setContentView(R.layout.activity_login);
@@ -63,20 +66,15 @@ public class LoginActivity extends Activity {
             mLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    try {
-                        String temppw = mPass.getText().toString() + temp;
-                        MessageDigest md = MessageDigest.getInstance("MD5");
-                        md.update(temppw.getBytes(),0,temppw.length());
-                        hash = new BigInteger(1,md.digest()).toString();
-                        System.out.println("login hash: " + hash);
-                        mAuth.signInWithEmailAndPassword(mUser.getText().toString(),hash)
-                                .addOnCompleteListener(LoginActivity.this,
-                                        new OnCompleteListener<AuthResult>() {
+                        //System.out.println("login hash: " + hash);
+                    mAuth.signInWithEmailAndPassword(mUser.getText().toString(),mPass.getText().toString())
+                            .addOnCompleteListener(LoginActivity.this,
+                                    new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
-                                    FirebaseUser user = mAuth.getCurrentUser();
+                                     currentUser = mAuth.getCurrentUser();
                                     Intent initIntent = new Intent(getApplicationContext(),InitScreenActivity.class);
                                     startActivity(initIntent);
                                 } else {
@@ -86,8 +84,6 @@ public class LoginActivity extends Activity {
                                 }
                             }
                         });
-
-                    }catch(NoSuchAlgorithmException e){}
                 }
             });//End login code
 
@@ -106,24 +102,15 @@ public class LoginActivity extends Activity {
                         @Override
                         public void onClick(View view) {
                             if(!signupPass.getText().toString().equals(confirmPass.getText().toString())){
-
                                 Toast.makeText(getApplicationContext(),
                                         "Passwords do not match!",Toast.LENGTH_LONG).show();
-
                             } else {
-                                String temppw = signupPass.getText().toString() + temp;
-                                try {
-                                    MessageDigest md = MessageDigest.getInstance("SHA-256");
-                                    md.update(temppw.getBytes(), 0, temppw.length());
-                                    hash = new BigInteger(1, md.digest()).toString();
-                                } catch (NoSuchAlgorithmException e) {
-                                }
                                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                final DatabaseReference accountRef = database.getReference("AccountData");
+                                final DatabaseReference accountRef = database.getReference("Users");
                                 String cleanedEmail = signupEmail.getText().toString().replaceAll("(\\.)", ",");
-                                DatabaseReference usernameRef = accountRef.child(signupUser.getText().toString());
+
                                 //TODO check for prexisting accounts and other edge cases.
-                                mAuth.createUserWithEmailAndPassword(signupEmail.getText().toString(), hash)
+                                mAuth.createUserWithEmailAndPassword(signupEmail.getText().toString(), signupPass.getText().toString())
                                         .addOnCompleteListener(LoginActivity.this,
                                                 new OnCompleteListener<AuthResult>() {
                                                     @Override
@@ -133,15 +120,33 @@ public class LoginActivity extends Activity {
 
                                                             Toast.makeText(getApplicationContext(), "Signup successful!",
                                                                     Toast.LENGTH_LONG).show();
-                                                            currentUser = mAuth.getCurrentUser();
-                                                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                                                    .setDisplayName(signupUser.getText().toString()).build();
-                                                            currentUser.updateProfile(profileUpdates);
+                                                            mAuth.signInWithEmailAndPassword(signupEmail.getText().toString(),signupPass.getText().toString())
+                                                                    .addOnCompleteListener(LoginActivity.this,
+                                                                            new OnCompleteListener<AuthResult>() {
+                                                                                @Override
+                                                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                                    if (task.isSuccessful()) {
+                                                                                        // Sign in success, update UI with the signed-in user's information
+                                                                                        currentUser = mAuth.getCurrentUser();
+                                                                                        System.out.println("is current user null? " + currentUser == null);
+                                                                                        System.out.println(currentUser.getUid());
+                                                                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                                                                .setDisplayName(signupUser.getText().toString()).build();
+                                                                                        currentUser.updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                            @Override
+                                                                                            public void onSuccess(Void aVoid) {
+                                                                                                System.out.println(currentUser.getDisplayName());
+                                                                                                Intent initIntent = new Intent(getApplicationContext(),InitScreenActivity.class);
+                                                                                                startActivity(initIntent);
+                                                                                            }
+                                                                                        });
 
+                                                                                    }
+                                                                                }
+                                                                            });
                                                         } else {
 
                                                             Toast.makeText(getApplication(), "Signup failed!", Toast.LENGTH_LONG).show();
-
 
                                                         }
                                                     }
@@ -162,7 +167,6 @@ public class LoginActivity extends Activity {
             startActivity(initIntent);
 
         }
-
 
     }
 
