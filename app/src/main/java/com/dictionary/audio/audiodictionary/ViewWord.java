@@ -57,7 +57,7 @@ public class ViewWord extends ListActivity {
     }
 
     private void readData(DataSnapshot dataSnapshot){
-        word = dataSnapshot.child(word).getValue(Word.class).getWord();
+        //word = dataSnapshot.child(word).getValue(Word.class).getWord();
 
         List a = new ArrayList();
         List<String> sentences = dataSnapshot.child(word).getValue(Word.class).getSentences();

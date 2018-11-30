@@ -238,6 +238,14 @@ public class AddWord extends Activity {
 
                                 myRef.child(w).setValue(wordData);
                             } else {
+                                wordData = new Word(
+                                        (String) dataSnapshot.child("uid").getValue(),
+                                        (String) dataSnapshot.child("word").getValue(),
+                                        (List<String>) dataSnapshot.child("sentences").getValue(),
+                                        (Map<String,Integer>) dataSnapshot.child("recordings").getValue(),
+                                        (List<String>) dataSnapshot.child("definitions").getValue()
+                                );
+
                                 wordData.recordings.put(fileName, 0);
                                 if (!wordData.sentences.contains(s))
                                     wordData.sentences.add(s);
