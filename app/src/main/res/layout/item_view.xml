@@ -20,7 +20,7 @@
             android:src="@drawable/ic_keyboard_arrow_up_black_24dp" />
 
         <TextView
-            android:id="@+id/rating"
+            android:id="@+id/rating_view"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

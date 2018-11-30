@@ -64,4 +64,8 @@ public class Word {
     public String getWord() {
         return word;
     }
+
+    public void setRecordings(List<Pair<String, Integer>> recordings) {
+        this.recordings = recordings;
+    }
 }
