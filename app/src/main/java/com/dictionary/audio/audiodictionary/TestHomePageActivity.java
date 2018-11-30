@@ -21,7 +21,6 @@ public class TestHomePageActivity extends Activity{
         TextView prefView = findViewById(R.id.testHomePref);
         learnView.setText(loadLearn);
         prefView.setText(loadPref);
-
     }
 
 }
