@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +29,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -100,7 +102,6 @@ public class LoadWords extends Activity {
 
             w = new Word(uid, word, sentences, recordings, definitions);
             words.add(w);
-
         }
 
         return words;
@@ -181,30 +182,28 @@ public class LoadWords extends Activity {
 
                     StorageReference storageRef = firebaseStorage.getReference();
                     StorageReference songsRef = storageRef.child(language +'/'
-                            + finalRecording+"3.gp");
+                            + finalRecording+".3gp");
 
-                    songsRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            //System.out.println("************** HELLO");
+                    try {
+                        File localFile  = new File(Environment.getExternalStoragePublicDirectory(
+                                Environment.DIRECTORY_DOWNLOADS), finalRecording + ".3gp");
 
-                            mediaPlayer = new MediaPlayer();
+                        localFile .createNewFile();
+                        songsRef.getFile(localFile);
 
-                            try {
-                                mediaPlayer.setDataSource(uri.getPath());
-                                mediaPlayer.prepare();
+                        System.out.println("******************* IM HERE 2" + songsRef.getName());
 
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                        mediaPlayer = new MediaPlayer();
+                        mediaPlayer.setDataSource(localFile.getAbsolutePath());
+                        mediaPlayer.prepare();
+                        System.out.println("******************* IM HERE 3");
+                        mediaPlayer.start();
 
-                            mediaPlayer.start();
-
-                            Toast.makeText(LoadWords.this, "Recording Playing",
-                                    Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
+                        Toast.makeText(LoadWords.this, "Recording Playing",
+                                Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
 

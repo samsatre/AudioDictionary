@@ -93,6 +93,8 @@ public class AddWord extends Activity {
 
 //        language = "English";
         language = startingIntent.getStringExtra("language");
+
+
         recording = false;
         mediaRecorder = new MediaRecorder();
 

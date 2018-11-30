@@ -42,6 +42,7 @@ public class HomeScreenActivity extends Activity {
         addWordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println(getIntent().getStringExtra("preferred") + "((((********");
 
                 Intent nextIntent = new Intent(getApplicationContext(), AddWord.class);
                 startActivity(nextIntent);
