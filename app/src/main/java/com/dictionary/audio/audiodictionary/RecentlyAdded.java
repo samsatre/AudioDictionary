@@ -2,6 +2,7 @@ package com.dictionary.audio.audiodictionary;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -19,6 +21,7 @@ import java.util.List;
 public class RecentlyAdded extends Activity {
 
     private RecyclerView mRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,22 +29,36 @@ public class RecentlyAdded extends Activity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_languages);
 
-        List<Language> languages = new ArrayList<>();
+        final List<Language> languages = new ArrayList<>();
 
         languages.add(new Language("English", "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-800.png"));
         languages.add(new Language("French", "http://cdn.countryflags.com/thumbs/france/flag-800.png"));
         languages.add(new Language("Spanish", "http://cdn.countryflags.com/thumbs/spain/flag-800.png"));
 
         LanguageAdapter adapter = new LanguageAdapter(languages);
+        adapter.setClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int index = mRecyclerView.indexOfChild(v);
+                Toast.makeText(RecentlyAdded.this,"Searching " + languages.get(index).getName() + " words", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RecentlyAdded.this, LoadWords.class);
+                intent.putExtra("language", languages.get(index).getName());
+
+                startActivity(intent);
+            }
+        });
+
 
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
 
     }
 
     public class LanguageAdapter extends
             RecyclerView.Adapter<LanguageAdapter.ViewHolder> {
+        private View.OnClickListener mClickListener;
 
         // Provide a direct reference to each of the views within a data item
         // Used to cache the views within the item layout for fast access
@@ -78,12 +95,26 @@ public class RecentlyAdded extends Activity {
             LayoutInflater inflater = LayoutInflater.from(context);
 
             // Inflate the custom layout
-            View contactView = inflater.inflate(R.layout.recently_added_item, parent, false);
+            View contactView = inflater.inflate(R.layout.language_item, parent, false);
 
             // Return a new holder instance
             ViewHolder viewHolder = new ViewHolder(contactView);
+
+
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mClickListener.onClick(v);
+                }
+            });
+
             return viewHolder;
         }
+
+        public void setClickListener(View.OnClickListener callback) {
+            mClickListener = callback;
+        }
+
 
         // Involves populating data into the item through holder
         @Override
