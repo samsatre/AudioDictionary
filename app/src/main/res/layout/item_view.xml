@@ -1,36 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
-    tools:context=".ViewWord">
+    android:layout_marginTop="3dp"
+    app:cardCornerRadius="5dp"
+    android:padding="3dp"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/translationText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:fontFamily="monospace"
-        android:text="@string/translated"
-        android:textAlignment="center"
-        android:textSize="36sp"
-        android:typeface="normal" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/linLay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/playBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/Play" />
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:id="@+id/upVote"
+            android:src="@drawable/ic_keyboard_arrow_up_black_24dp" />
 
-    <TextView
-        android:id="@+id/sentenceText"
+        <TextView
+            android:id="@+id/rating_view"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="0" />
+
+        <ImageView
+            android:id="@+id/downVote"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="81dp"
-        android:text="@string/sentence1"
-        android:textAppearance="@android:style/TextAppearance.Holo"
-        tools:layout_marginTop="12dp" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:context=".ViewWord">
+
+        <TextView
+            android:id="@+id/translationText"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="45dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="monospace"
+            android:text="@string/translated"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            android:typeface="normal" />
+
+        <Button
+            android:id="@+id/playBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/Play" />
+
+        <TextView
+            android:id="@+id/sentenceText"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:text="@string/sentence1"
+            android:textAppearance="@android:style/TextAppearance.Holo"
+            tools:layout_marginTop="12dp" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>
