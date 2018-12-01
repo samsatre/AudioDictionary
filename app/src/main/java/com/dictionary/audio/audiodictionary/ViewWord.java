@@ -1,13 +1,18 @@
 package com.dictionary.audio.audiodictionary;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.ListActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.io.IOException;
 import java.util.*;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,13 +26,11 @@ public class ViewWord extends ListActivity {
     ViewListAdapter mAdapter;
     private DatabaseReference mBase;
     private DatabaseReference mTable;
-    private DatabaseReference mWord;
     private static String word;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Intent intent = getIntent();
 
         // String tableName = "English";
@@ -35,7 +38,6 @@ public class ViewWord extends ListActivity {
 
         final String tableName = intent.getStringExtra("language");
         word = intent.getStringExtra("word");
-
         mBase = FirebaseDatabase.getInstance().getReference();
         DataSnapshot dataSnapshot;
         mTable = mBase.child(tableName);
@@ -50,8 +52,9 @@ public class ViewWord extends ListActivity {
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {}
-                });
+                    public void onCancelled(DatabaseError databaseError) {Log.i("TAG", "Cancelled");}
+
+        });
         //this section will be from the data base using the uid from the intent
 
     }

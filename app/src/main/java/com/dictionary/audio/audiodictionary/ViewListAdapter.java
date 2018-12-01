@@ -1,6 +1,9 @@
 package com.dictionary.audio.audiodictionary;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.support.annotation.NonNull;
 import android.widget.ArrayAdapter;
 
@@ -20,6 +23,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class ViewListAdapter extends ArrayAdapter {
@@ -55,7 +68,7 @@ public class ViewListAdapter extends ArrayAdapter {
         upvote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerVote(rating,1, my_item.getRecording());
+                registerVote(rating,1, my_item.getIndex());
 
             }
         });
@@ -63,10 +76,48 @@ public class ViewListAdapter extends ArrayAdapter {
         downvote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerVote(rating,-1, my_item.getRecording());
+                registerVote(rating,-1, my_item.getIndex());
             }
         });
 
+        btnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) throws IllegalArgumentException,
+                    SecurityException, IllegalStateException {
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageRef = storage.getReference();
+                Log.i("TAG",language + "/" + my_item.getRecordingId()+".3gp");
+                StorageReference audioRef = storageRef.child(language + "/" + my_item.getRecordingId()+".3gp");
+                final long ONE_MEGABYTE = 1024 * 1024;
+                //audioRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                try {
+                    final File localFile = File.createTempFile("audio", "mp3");
+                    audioRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            // Local temp file has been created
+                            MediaPlayer mediaPlayer = new MediaPlayer();
+                            try {
+                                mediaPlayer.setDataSource(localFile.getPath());
+                                mediaPlayer.prepare();
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            mediaPlayer.start();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         // Return the completed view to render on screen
         return convertView;
     }

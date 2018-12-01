@@ -2,12 +2,12 @@ package com.dictionary.audio.audiodictionary;
 
 class Item implements Comparable<Item> {
     String sentence;
-    int recording, votes;
+    int votes, index;
     String definition, recordingId;
 
-    public Item(String sentence, int recording, int votes, String definition, String recordingId) {
+    public Item(String sentence, int index, int votes, String definition, String recordingId) {
         this.sentence = sentence;
-        this.recording = recording;
+        this.index = index;
         this.definition = definition;
         this.recordingId = recordingId;
         this.votes = votes;
@@ -17,8 +17,8 @@ class Item implements Comparable<Item> {
         return sentence;
     }
 
-    public int getRecording() {
-        return recording;
+    public int getIndex() {
+        return index;
     }
 
     public String getDefinition() {
@@ -37,8 +37,8 @@ class Item implements Comparable<Item> {
         return votes;
     }
 
-    public void setRecording(int recording) {
-        this.recording = recording;
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public void setRecordingId(String recordingId) {
@@ -51,6 +51,6 @@ class Item implements Comparable<Item> {
 
     @Override
     public int compareTo(Item o) {
-        return o.recording - this.recording;
+        return o.index - this.index;
     }
 }
