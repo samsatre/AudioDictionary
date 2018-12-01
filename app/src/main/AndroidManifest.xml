@@ -29,6 +29,12 @@
         <activity android:name=".AddWord" />
         <activity android:name=".HomeScreenActivity" />
         <activity android:name=".LoadWords"/>
+        <activity android:name=".FavoritesActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".RecentlyAdded" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

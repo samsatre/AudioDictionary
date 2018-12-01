@@ -17,6 +17,7 @@ public class HomeScreenActivity extends Activity {
     Button searchButton;
     Button flashButton;
     TextView stat_msg;
+    Button favoritesButton;
 
     private final String MyPrefs ="DictionaryPrefs";
     SharedPreferences mSp;
@@ -54,6 +55,15 @@ public class HomeScreenActivity extends Activity {
                 Intent nextIntent = new Intent(getApplicationContext(), SearchActivity.class);
                 startActivity(nextIntent);
 
+            }
+        });
+
+        favoritesButton = findViewById(R.id.favoritesButton);
+        favoritesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nextIntent = new Intent(getApplicationContext(),FavoritesActivity.class);
+                startActivity(nextIntent);
             }
         });
 
