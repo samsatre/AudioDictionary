@@ -41,8 +41,11 @@ public class LoginActivity extends Activity {
     EditText signupPass;
     EditText signupEmail;
     EditText confirmPass;
+    EditText forgotEmail;
     Dialog signupDialog;
+    Dialog forgotDialog;
     Button signupSubmit;
+    Button forgotSubmit;
     private FirebaseAuth mAuth;
     FirebaseUser currentUser;
     protected void onCreate(Bundle savedInstanceState){
@@ -86,6 +89,44 @@ public class LoginActivity extends Activity {
                         });
                 }
             });//End login code
+
+            mForgot.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view){
+
+                    forgotDialog = new Dialog(LoginActivity.this);
+                    forgotDialog.setContentView(R.layout.forgotpassword_popup);
+                    forgotSubmit = forgotDialog.findViewById(R.id.forgotten_submit_btn);
+                    forgotEmail = forgotDialog.findViewById(R.id.forgotten_email);
+
+                    forgotSubmit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            mAuth.sendPasswordResetEmail(forgotEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+
+                                        Toast.makeText(getApplicationContext(),"Password reset email sent to: " + forgotEmail.getText().toString(),Toast.LENGTH_LONG).show();
+
+                                    } else {
+
+                                        Toast.makeText(getApplicationContext(),"No such email exists!",Toast.LENGTH_LONG).show();
+
+                                    }
+                                }
+                            });
+                            forgotDialog.dismiss();
+                        }
+                    });
+
+                    forgotDialog.show();
+
+                }
+
+            });
 
             mSignup.setOnClickListener(new View.OnClickListener() {
                 @Override
