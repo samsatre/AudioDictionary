@@ -27,8 +27,15 @@ public class ViewWord extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String tableName = "English";
-        word = "young";
+
+        Intent intent = getIntent();
+
+        // String tableName = "English";
+        // word = "water";
+
+        String tableName = intent.getStringExtra("language");
+        word = intent.getStringExtra("word");
+
         mBase = FirebaseDatabase.getInstance().getReference();
         DataSnapshot dataSnapshot;
         mTable = mBase.child(tableName);

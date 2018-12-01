@@ -16,40 +16,31 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SearchActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.google.android.gms.actions.SEARCH_ACTION" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
-        <activity android:name=".InitScreenActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestHomePageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".AddWord">
+        <activity android:name=".InitScreenActivity" />
+        <activity android:name=".TestHomePageActivity" />
+        <activity android:name=".AddWord" />
+        <activity android:name=".HomeScreenActivity" />
+        <activity android:name=".RecentlyAdded" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewWord">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ViewWord" />
     </application>
 
 </manifest>

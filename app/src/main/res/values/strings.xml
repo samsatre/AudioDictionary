@@ -13,54 +13,32 @@
     <string name="translated">Translation</string>
     <string name="Play">PlayBtn</string>
     <string name="sentence1">sentence</string>
+    <string name="queryInNative">Word in Native Language</string>
+    <string name="queryInLearning">Word in Learning Language</string>
+    <string name="searchTitle">Search for Word</string>
+    <string name="noResults">No Results Found</string>
+
+    <string name="native_lang">Native Language:</string>
+    <string name="learning_lang">Language to Learn:</string>
+    <string name="stat_msg">You have contributed 0 words!</string>
+    <string name="stat_msg1">You have contributed </string>
+    <string name="stat_msg2"> words!</string>
+    <string name="add_word_button">Add More Words</string>
+    <string name="search_button">Search New Words</string>
+    <string name="rand_button">Learn Random Words</string>
+    <string name="username_txt">Username:</string>
+    <string name="password_txt">Password:</string>
+    <string name="save">Save Changes</string>
 
     <string-array name="learnArray">
         <item>Language to Learn</item>
         <item>English</item>
         <item>Español</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
     </string-array>
     <string-array name="preferArray">
         <item>Preferred Language</item>
         <item>English</item>
         <item>Español</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
-        <item>test</item>
 
     </string-array>
     <string name="title_activity_view_word">ViewWord</string>

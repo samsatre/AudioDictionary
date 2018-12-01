@@ -105,7 +105,7 @@ public class LoginActivity extends Activity {
                         public void onClick(View view) {
                             String temppw = signupPass.getText().toString() + temp;
                             try {
-                                MessageDigest md = MessageDigest.getInstance("MD5");
+                                MessageDigest md = MessageDigest.getInstance("SHA-256");
                                 md.update(temppw.getBytes(),0,temppw.length());
                                 hash = new BigInteger(1,md.digest()).toString();
                             }catch(NoSuchAlgorithmException e){}

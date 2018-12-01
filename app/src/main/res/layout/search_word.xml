@@ -1,59 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/searchTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/searchTitle"
+        android:textAlignment="center"
+        android:textSize="30sp"/>
 
     <SearchView
-        android:id="@+id/searchBar"
-        android:layout_width="231dp"
-        android:layout_height="52dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toTopOf="@+id/recentSearchesText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.689" />
+        android:id="@+id/nativeSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/searchTitle"
+        android:iconifiedByDefault="false"
+        android:focusable="false"
+        android:focusedByDefault="false"
+        android:inputType="textAutoComplete"
+        android:queryHint="@string/queryInNative" />
 
-    <EditText
-        android:id="@+id/recentSearchesText"
-        android:layout_width="166dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Recent Searches"
+    <SearchView
+        android:id="@+id/learningSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nativeSearch"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:iconifiedByDefault="false"
+        android:focusable="false"
+        android:focusedByDefault="false"
+        android:inputType="textAutoComplete"
+        android:queryHint="@string/queryInLearning" />
+
+    <Button
+        android:id="@+id/resultButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/learningSearch"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="#003e4649"
+        android:text=""
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="126dp" />
+        android:textSize="30sp" />
 
-    <ScrollView
-        android:id="@+id/recentSearchesView"
-        android:layout_width="293dp"
-        android:layout_height="320dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.974"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recentSearchesText"
-        app:layout_constraintVertical_bias="0.384">
+    <TextView
+        android:id="@+id/noResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/learningSearch"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="#003e4649"
+        android:text="@string/noResults"
+        android:textAlignment="center"
+        android:textSize="30sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+    <TextView
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noResult"
+        android:text=""
+        android:textSize="200sp"/>
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/addWordButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view"
+        android:layout_alignParentBottom="true"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:text="@string/addWord" />
+
+</RelativeLayout>

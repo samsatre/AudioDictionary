@@ -1,6 +1,9 @@
 package com.dictionary.audio.audiodictionary;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -62,9 +65,17 @@ public class AddWord extends Activity {
     Word wordData = null;
     boolean recording, addNewRow;
 
+    private final String STATE_ADDED = "wordsAddedCount";
+    private final String MyPrefs ="DictionaryPrefs";
+    SharedPreferences mSp;
+    SharedPreferences.Editor mEdit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent startingIntent = getIntent();
+
         setContentView(R.layout.activity_addword);
 
         word = (EditText) findViewById(R.id.word);
@@ -76,10 +87,19 @@ public class AddWord extends Activity {
         replayBtn = (Button) findViewById(R.id.replay);
         retryBtn = (Button) findViewById(R.id.rerecord);
 
+        mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
+        mEdit = mSp.edit();
 
-        language = "English";
+
+//        language = "English";
+        language = startingIntent.getStringExtra("language");
         recording = false;
         mediaRecorder = new MediaRecorder();
+
+        String wordFromIntent = startingIntent.getStringExtra("word");
+        if (wordFromIntent != null) {
+            word.setText(wordFromIntent);
+        }
 
 
         recordAudio.setOnClickListener(new View.OnClickListener() {
@@ -165,6 +185,15 @@ public class AddWord extends Activity {
                 final String d = definition.getText().toString();
                 final String s = sentence.getText().toString();
 
+                if (mSp.contains(STATE_ADDED)) {
+                    int wordsAddedCount = mSp.getInt(STATE_ADDED, 0);
+                    mEdit.putInt(STATE_ADDED, (wordsAddedCount+1));
+                    mEdit.commit();
+                } else {
+                    mEdit.putInt(STATE_ADDED, 1);
+                    mEdit.commit();
+                }
+
                 if(w.length() == 0) {
                     Toast.makeText(AddWord.this, "Please add a Word",
                             Toast.LENGTH_LONG).show();
@@ -236,6 +265,7 @@ public class AddWord extends Activity {
                                                     Toast.LENGTH_LONG).show();
                                         }
                                     });
+                            finish();
                         }
 
                         @Override
