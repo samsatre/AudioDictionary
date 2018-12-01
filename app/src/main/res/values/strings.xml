@@ -17,6 +17,7 @@
     <string name="queryInLearning">Word in Learning Language</string>
     <string name="searchTitle">Search for Word</string>
     <string name="noResults">No Results Found</string>
+    <string name="SignUp">"Don't have an account? Sign up here!"</string>
 
     <string name="native_lang">Native Language:</string>
     <string name="learning_lang">Language to Learn:</string>

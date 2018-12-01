@@ -4,36 +4,39 @@
     android:layout_height="match_parent">
 
 
-
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textAutoComplete"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="30dp"
-        android:hint="Email address"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="120dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
-        />
+        android:layout_marginTop="100dp"
+        android:fontFamily="sans-serif"
+        android:hint="Email address"
+        android:inputType="textEmailAddress"
+        android:textSize="15dp"
+        android:typeface="normal" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textWebPassword"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/username"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:layout_alignParentEnd="true"
         android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif"
         android:hint="Password"
-        />
+        android:inputType="textWebPassword"
+        android:textSize="15dp"
+        android:typeface="normal" />
 
     <Button
         android:id="@+id/loginbutton"
@@ -47,7 +50,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginTop="15dp"
         android:text="Log in"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
 
 
@@ -59,12 +62,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/login_forgot"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimary"
         android:textSize="15sp" />
 
     <Button
         android:id="@+id/signupbutton"
-        android:textColor="@color/text"
+        android:textColor="@color/colorPrimary"
         android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,6 +80,5 @@
 
 
         />
-
 
 </RelativeLayout>
