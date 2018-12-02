@@ -274,9 +274,9 @@ public class AddWord extends Activity {
                                         (List<String>) dataSnapshot.child("definitions").getValue()
                                 );
 
+                                wordData.definitions.add(d);
                                 wordData.recordings.add(new Pair<String, Integer>(fileName, 0));
-                                if (!wordData.sentences.contains(s))
-                                    wordData.sentences.add(s);
+                                wordData.sentences.add(s);
 
                                 myRef.child(w).setValue(wordData);
                             }
