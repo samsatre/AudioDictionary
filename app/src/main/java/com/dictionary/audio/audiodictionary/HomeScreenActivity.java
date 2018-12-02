@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -96,9 +97,7 @@ public class HomeScreenActivity extends Activity {
             }
         });
 
-        /*
-        TODO implement random word feature
-         */
+
         randomButton = findViewById(R.id.randButton);
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +141,12 @@ public class HomeScreenActivity extends Activity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        moveTaskToBack(true);
     }
 
     @Override
