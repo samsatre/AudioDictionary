@@ -37,11 +37,12 @@ public class ViewWord extends ListActivity {
     private static String word;
     List<String> definitions;
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
+        intent = getIntent();
 
         // String tableName = "English";
         // word = "water";
@@ -113,18 +114,18 @@ public class ViewWord extends ListActivity {
                         if(dataSnapshot.getValue() == null){
 
                             HashMap<String,String> insert = new HashMap<String,String>();
-                            insert.put(word,definitions.get(0));
+                            insert.put(word+","+definitions.get(0),intent.getStringExtra("language"));
                             FirebaseDatabase.getInstance().getReference("Favorites").child(currentUser.getUid()).setValue(insert);
                             Toast.makeText(getApplicationContext(),"Word added to favorites!",Toast.LENGTH_LONG).show();
                         } else {
 
                             HashMap<String,String> insert = (HashMap<String,String>)dataSnapshot.getValue();
-                            if(insert.containsKey(word)) {
+                            if(insert.containsKey(word+","+definitions.get(0))) {
 
                                 Toast.makeText(getApplicationContext(),"Already in favorites!",Toast.LENGTH_LONG).show();
 
                             } else {
-                                insert.put(word, definitions.get(0));
+                                insert.put(word+","+definitions.get(0),intent.getStringExtra("language"));
                                 FirebaseDatabase.getInstance().getReference("Favorites").child(currentUser.getUid()).setValue(insert);
                                 Toast.makeText(getApplicationContext(),"Word added to favorites!",Toast.LENGTH_LONG).show();
                             }

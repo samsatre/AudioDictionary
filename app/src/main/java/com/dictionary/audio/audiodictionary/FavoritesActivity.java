@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,32 @@ public class FavoritesActivity extends ListActivity {
     String currLanguage;
     ArrayList<String> languages;
 
+    class MyWord{
+
+        String word;
+        ArrayList<String> definitions;
+        String language;
+
+        public String getWord(){
+
+            return this.word;
+
+        }
+
+        public ArrayList<String> getDefinitions(){
+
+
+            return this.definitions;
+        }
+
+        public String getLanguage(){
+
+            return this.language;
+
+        }
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
@@ -62,11 +89,12 @@ public class FavoritesActivity extends ListActivity {
                     HashMap<String, String> faves = (HashMap<String, String>) dataSnapshot.getValue();
                     Set<String> keyList = faves.keySet();
                     for (String key : keyList) {
-
-                        Word word = new Word();
-                        word.word = key;
+                        String[] temp = key.split(",");
+                        MyWord word = new MyWord();
+                        word.word = temp[0];
                         word.definitions = new ArrayList<>();
-                        word.definitions.add(faves.get(key));
+                        word.definitions.add(temp[1]);
+                        word.language = faves.get(key);
                         mAdapter.add(word);
                     }
                 }
@@ -94,6 +122,18 @@ public class FavoritesActivity extends ListActivity {
                                     }).show();
                         }
                     });
+
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            Intent viewintent = new Intent(getApplicationContext(),ViewWord.class);
+                            viewintent.putExtra("word",((MyWord)mAdapter.getItem(i)).getWord());
+                            viewintent.putExtra("language",((MyWord)mAdapter.getItem(i)).getLanguage());
+                            startActivity(viewintent);
+
+                        }
+                    });
             }
 
             @Override
@@ -101,6 +141,8 @@ public class FavoritesActivity extends ListActivity {
 
             }
         });
+
+
 
 
     }
@@ -148,7 +190,7 @@ class Favorites{
 class FavoritesAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
-    ArrayList<Word> list = new ArrayList<>();
+    ArrayList<FavoritesActivity.MyWord> list = new ArrayList<>();
     private Context mContext;
 
     public FavoritesAdapter(Context context){
@@ -168,7 +210,7 @@ class FavoritesAdapter extends BaseAdapter {
 
         View tempView = convertView;
         ViewHolder holder;
-        Word curr = list.get(position);
+        final FavoritesActivity.MyWord curr = list.get(position);
         if(convertView == null){
 
             holder = new ViewHolder();
@@ -176,6 +218,7 @@ class FavoritesAdapter extends BaseAdapter {
             tempView = inflater.inflate(R.layout.favorites_list_view,parent,false);
             holder.word = tempView.findViewById(R.id.favorite_word);
             holder.description = tempView.findViewById(R.id.favorite_description);
+            holder.remove = tempView.findViewById(R.id.remove_button);
             tempView.setTag(holder);
 
         } else {
@@ -183,13 +226,25 @@ class FavoritesAdapter extends BaseAdapter {
             holder = (ViewHolder) tempView.getTag();
 
         }
+        holder.remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                final DatabaseReference users = database.getReference("Favorites");
+                users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(curr.word+","+curr.getDefinitions().get(0)).removeValue();
+                remove(curr.word);
+            }
+        });
+        holder.language = curr.getLanguage();
         holder.word.setText(curr.getWord());
+
         String definition = curr.getDefinitions().get(0);
         if(definition == null){
             holder.description.setText(holder.description.getText().toString() + "No Definitions!");
         }else {
             holder.description.setText(holder.description.getText().toString() + curr.getDefinitions().get(0));
         }
+
         return tempView;
 
     }
@@ -198,10 +253,12 @@ class FavoritesAdapter extends BaseAdapter {
 
         TextView word;
         TextView description;
+        String language;
+        Button remove;
 
     }
 
-    public void add(Word listItem){
+    public void add(FavoritesActivity.MyWord listItem){
 
         list.add(listItem);
         notifyDataSetChanged();
