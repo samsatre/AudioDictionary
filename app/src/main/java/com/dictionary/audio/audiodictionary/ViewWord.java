@@ -166,6 +166,6 @@ public class ViewWord extends ListActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    
+
 }
 
