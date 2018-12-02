@@ -43,7 +43,7 @@ public class HomeScreenActivity extends Activity {
         mEdit = mSp.edit();
 
         int wordsAddedCount = mSp.getInt(STATE_ADDED, 0);
-       // stat_msg.setText(R.string.stat_msg1 + wordsAddedCount + R.string.stat_msg2);
+        //stat_msg.setText(R.string.stat_msg1 + wordsAddedCount + R.string.stat_msg2);
 
         addWordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +114,11 @@ public class HomeScreenActivity extends Activity {
             case R.id.action_home:
                 Intent nextIntent2 = new Intent(getApplicationContext(),HomeScreenActivity.class);
                 startActivity(nextIntent2);
+                return true;
+            case R.id.action_logout:
+                // TODO- actually log out
+                Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(nextIntent3);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -163,6 +163,11 @@ public class RecentlyAdded extends Activity {
                 Intent nextIntent2 = new Intent(getApplicationContext(),HomeScreenActivity.class);
                 startActivity(nextIntent2);
                 return true;
+            case R.id.action_logout:
+                // TODO- actually log out
+                Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(nextIntent3);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

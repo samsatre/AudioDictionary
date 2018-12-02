@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchActivity">
+        <activity android:name=".SearchActivity"
+            android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="com.google.android.gms.actions.SEARCH_ACTION" />
 
@@ -24,31 +25,41 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".InitScreenActivity" />
-        <activity android:name=".TestHomePageActivity" />
-        <activity android:name=".AddWord" />
-        <activity android:name=".HomeScreenActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".LoadWords"/>
-        <activity android:name=".FavoritesActivity">
+        <activity android:name=".InitScreenActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".TestHomePageActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".AddWord"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".HomeScreenActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".SettingsActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".LoadWords"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".FavoritesActivity"
+            android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".RecentlyAdded" >
+        <activity android:name=".RecentlyAdded"
+            android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewWord" />
+        <activity android:name=".ViewWord"
+            android:screenOrientation="sensorPortrait"/>
     </application>
 
 </manifest>
