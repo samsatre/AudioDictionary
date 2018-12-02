@@ -32,7 +32,7 @@
     <string name="fav">My Favorites</string>
     <string name="action_settings">Settings</string>
     <string name="action_home">Home</string>
-    <string name="action_logout">Log Out</string>
+    <string name="action_logout">Logout</string>
     <string name="recent_button">Recently Added</string>
     <string name="title">AudioDictionary</string>
 
