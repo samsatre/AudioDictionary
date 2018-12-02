@@ -1,23 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/favorite_word"
-        android:layout_width="wrap_content"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:background="#ededed"
+    android:paddingBottom="10dp">
+    <!-- A CardView that contains a TextView -->
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="test text"
-        android:textSize = "25sp"
-        android:textColor="@color/colorBlackBorder" />
+        android:layout_gravity="center"
+        android:layout_marginEnd="3dp"
+        android:padding="3dp"
+        card_view:cardCornerRadius="5dp">
 
-    <TextView
-        android:id="@+id/favorite_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:layout_marginLeft = "15dp"
-        android:layout_toEndOf="@+id/favorite_word"
-        android:text="Definition: "
-        android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical">
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/favorite_word"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:gravity="center"
+                android:text="Word"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <TextView
+                android:id="@+id/favorite_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent" -->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/favorite_word"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="test text"-->
+        <!--android:textSize = "25sp"-->
+        <!--android:textColor="@color/colorBlackBorder" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/favorite_description"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="6dp"-->
+        <!--android:layout_marginLeft = "15dp"-->
+        <!--android:layout_toEndOf="@+id/favorite_word"-->
+        <!--android:text="Definition: "-->
+        <!--android:textSize="18sp" />-->
+
+<!--</RelativeLayout>-->
+
+

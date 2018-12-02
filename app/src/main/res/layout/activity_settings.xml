@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/learnText"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="65dp"
             android:textColorHint="@color/text"
             app:hintTextAppearance="@android:style/TextAppearance.Small"
             >
@@ -114,7 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/learnText"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="115dp"
             android:textColorHint="@color/text"
             app:hintTextAppearance="@android:style/TextAppearance.Small"
             >
@@ -134,7 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/learnText"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="165dp"
             android:textColorHint="@color/text"
             app:hintTextAppearance="@android:style/TextAppearance.Small"
             >

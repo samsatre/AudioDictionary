@@ -19,7 +19,8 @@
         android:paddingRight="50dp"
         android:background="@color/buttons"
         android:textColor="@color/white"
-        android:drawableLeft="@drawable/ic_search"/>
+        android:drawableLeft="@drawable/ic_search"
+        />
 
 
     <Button
@@ -61,7 +62,7 @@
         android:drawableLeft="@drawable/ic_randword"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
-        android:text="Random Words"
+        android:text="Random Word"
         android:textColor="@color/white" />
 
     <Button
