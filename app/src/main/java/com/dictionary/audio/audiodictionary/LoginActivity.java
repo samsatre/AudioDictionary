@@ -97,7 +97,6 @@ public class LoginActivity extends Activity {
                     }
                 }
             });//End login code
-            //TODO edit forgot password popup dialog to match app theme
             mForgot.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -140,7 +139,6 @@ public class LoginActivity extends Activity {
                 }
 
             });
-            //TODO edit signup popup dialog to match app theme
             mSignup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
