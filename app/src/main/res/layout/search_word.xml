@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="232dp"
+        android:layout_marginTop="200dp"
         android:background="#003e4649"
         android:text=""
         android:textAlignment="center"
