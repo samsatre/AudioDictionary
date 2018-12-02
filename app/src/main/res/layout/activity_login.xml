@@ -11,7 +11,7 @@
     <android.support.v7.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/appicon_no_border"
+        android:src="@drawable/appicon_light"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         />
