@@ -57,7 +57,7 @@
             android:id="@+id/signup_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete"
+            android:inputType="textWebPassword"
             android:textColor="@color/colorPrimary"
             android:hint="Password"
             />
@@ -76,7 +76,7 @@
             android:id="@+id/signup_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete"
+            android:inputType="textWebPassword"
             android:textColor="@color/colorPrimary"
             android:hint="Confirm password"
             />
@@ -91,7 +91,8 @@
         android:layout_marginTop="40dp"
         android:text="Submit"
         android:textSize="20sp"
-        android:background="@color/colorAccent"/>
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"/>
 
 
 </LinearLayout>

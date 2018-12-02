@@ -52,7 +52,7 @@ public class HomeScreenActivity extends Activity {
         searchButton = findViewById(R.id.searchButton);
         recentButton = findViewById(R.id.recentButton);
 
-        stat_msg = findViewById(R.id.statText);
+        //stat_msg = findViewById(R.id.statText);
 
         mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
         mEdit = mSp.edit();
@@ -149,7 +149,7 @@ public class HomeScreenActivity extends Activity {
 
         super.onResume();
 
-        stat_msg = findViewById(R.id.statText);
+        //stat_msg = findViewById(R.id.statText);
 
         mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
         mEdit = mSp.edit();

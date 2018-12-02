@@ -19,7 +19,7 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/buttons"
             android:hint="Email Address"
             />
 
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/buttons"
             android:inputType="textWebPassword"/>
 
     </android.support.design.widget.TextInputLayout>
@@ -47,8 +47,8 @@
         android:id="@+id/loginbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:textColor="@color/text"
+        android:background="@color/buttons"
+        android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
         android:text="Log in"
         android:textSize="20sp"
@@ -62,12 +62,12 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:text="@string/login_forgot"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/buttons"
         android:textSize="15sp" />
 
     <Button
         android:id="@+id/signupbutton"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/buttons"
         android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

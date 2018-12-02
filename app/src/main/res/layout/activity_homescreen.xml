@@ -36,23 +36,12 @@
         android:text="Add New Words"
         android:textColor="@color/white"/>
 
-    <TextView
-        android:id="@+id/statText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/contributeButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:text="You have added 0 words"
-        android:textSize="18sp"
-        />
-
     <Button
         android:id="@+id/favoritesButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/statText"
+        android:layout_below="@+id/contributeButton"
         android:layout_marginTop="15dp"
         android:background="@color/buttons"
         android:text="My Favorites"
@@ -88,7 +77,6 @@
         android:text="Recently Added"
         android:textColor="@color/white"
         android:drawableLeft="@drawable/ic_recent"/>
-
 
 
 </RelativeLayout>
