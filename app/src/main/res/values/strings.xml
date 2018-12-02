@@ -52,7 +52,7 @@
         <item>French</item>
     </string-array>
     <string-array name="preferArray">
-        <item>Native Language</item>
+        <item>Preferred Language</item>
         <item>English</item>
         <item>Spanish</item>
         <item>French</item>

@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#36A0ED</color>
+    <color name="colorPrimary">#4C6085</color>
     <color name="colorPrimaryDark">#4C6085</color>
     <color name="colorAccent">#36F1CD</color>
 
-
-
     <color name="buttons">#36A0ED</color>
-
-    <color name="colorBlackBorder">#000000</color>
+    <color name="colorBlackBorder">#4C6085</color>
     <color name="colorBlueForgot">#1768ea</color>
     <color name="text">#32322C</color>
     <color name="white">#FFFFFF</color>
