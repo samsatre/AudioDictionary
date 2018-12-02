@@ -54,7 +54,7 @@ public class SettingsActivity extends Activity {
 
                 mEdit.putString(STATE_PREFERRED,preferSpin.getSelectedItem().toString());
                 mEdit.commit();
-                Toast.makeText(getApplicationContext(),"Prefered language saved!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Preferred language saved!",Toast.LENGTH_LONG).show();
 
             }
         });

@@ -58,13 +58,13 @@ public class InitScreenActivity extends Activity {
                                 mLearnSpin.getSelectedItemPosition() == 0) {
 
                             Toast.makeText(getApplicationContext(),
-                                    "Please choose preferred language and language to learn",
+                                    "Please choose native language and language to learn",
                                     Toast.LENGTH_LONG).show();
 
                         } else if (mPreferSpin.getSelectedItemPosition() == 0) {
 
                             Toast.makeText(getApplicationContext(),
-                                    "Please choose a preferred language", Toast.LENGTH_LONG).show();
+                                    "Please choose a native language", Toast.LENGTH_LONG).show();
 
                         } else if (mLearnSpin.getSelectedItemPosition() == 0) {
 
