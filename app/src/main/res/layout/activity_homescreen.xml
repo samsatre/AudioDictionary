@@ -9,9 +9,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="@string/stat_msg"
-        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:text="@string/title"
+
+        android:textColor="#ce3232"
+        android:textSize="30sp"
+        android:typeface="serif"
+        android:textStyle="bold"
         />
 
     <Button
