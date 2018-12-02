@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 
 public class HomeScreenActivity extends Activity {
 
@@ -24,6 +35,9 @@ public class HomeScreenActivity extends Activity {
     TextView stat_msg;
     Button favoritesButton;
     Button recentButton;
+    Button randomButton;
+    private final String STATE_PREFERRED = "preferred";
+    private final String STATE_LEARN = "learn";
 
     private final String MyPrefs ="DictionaryPrefs";
     SharedPreferences mSp;
@@ -83,10 +97,56 @@ public class HomeScreenActivity extends Activity {
             }
         });
 
-        /*
-        TODO implement random word feature
-         */
 
+        randomButton = findViewById(R.id.randButton);
+        randomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("in random on click");
+                String language = mSp.getString(STATE_PREFERRED,"not found")+"-"
+                        +mSp.getString(STATE_LEARN,"not found2");
+                System.out.println("in random, database name: " + language);
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                final DatabaseReference words = database.getReference(language);
+                System.out.println("Inside here");
+                words.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        System.out.println("Inside onDataChange");
+                        String language = mSp.getString(STATE_PREFERRED,"not found")+"-"
+                                +mSp.getString(STATE_LEARN,"not found2");
+                        ArrayList<Word> mWords = new ArrayList<Word>();
+                        Iterator<DataSnapshot> children = dataSnapshot.getChildren().iterator();
+
+                        while(children.hasNext()){
+
+                            mWords.add(children.next().getValue(Word.class));
+
+                        }
+
+                        Random r = new Random();
+                        Word chosen = mWords.get((Math.abs(r.nextInt()) % mWords.size()));
+                        Intent viewWord = new Intent(getApplicationContext(),ViewWord.class);
+                        viewWord.putExtra("language",language);
+                        viewWord.putExtra("word",chosen.getWord());
+                        startActivity(viewWord);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        moveTaskToBack(true);
     }
 
     @Override
