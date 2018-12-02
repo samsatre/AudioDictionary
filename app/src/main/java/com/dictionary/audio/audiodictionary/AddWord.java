@@ -211,7 +211,6 @@ public class AddWord extends Activity {
                 final String w = word.getText().toString();
                 final String d = definition.getText().toString();
                 final String s = sentence.getText().toString();
-
                 if (mSp.contains(STATE_ADDED)) {
                     int wordsAddedCount = mSp.getInt(STATE_ADDED, 0);
                     mEdit.putInt(STATE_ADDED, (wordsAddedCount+1));
@@ -220,7 +219,6 @@ public class AddWord extends Activity {
                     mEdit.putInt(STATE_ADDED, 1);
                     mEdit.commit();
                 }
-
                 if(w.length() == 0) {
                     Toast.makeText(AddWord.this, "Please add a Word",
                             Toast.LENGTH_LONG).show();
