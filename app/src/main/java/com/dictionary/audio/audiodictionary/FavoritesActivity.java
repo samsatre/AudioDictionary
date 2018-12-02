@@ -126,7 +126,7 @@ public class FavoritesActivity extends ListActivity {
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                            System.out.println("inside lv item click listener");
                             Intent viewintent = new Intent(getApplicationContext(),ViewWord.class);
                             viewintent.putExtra("word",((MyWord)mAdapter.getItem(i)).getWord());
                             viewintent.putExtra("language",((MyWord)mAdapter.getItem(i)).getLanguage());
@@ -210,6 +210,7 @@ class FavoritesAdapter extends BaseAdapter {
 
         View tempView = convertView;
         ViewHolder holder;
+       final ViewGroup finalView = parent;
         final FavoritesActivity.MyWord curr = list.get(position);
         if(convertView == null){
 
@@ -232,7 +233,9 @@ class FavoritesAdapter extends BaseAdapter {
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 final DatabaseReference users = database.getReference("Favorites");
                 users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(curr.word+","+curr.getDefinitions().get(0)).removeValue();
+                Toast.makeText(finalView.getContext(),curr.word+" removed!",Toast.LENGTH_LONG).show();
                 remove(curr.word);
+
             }
         });
         holder.language = curr.getLanguage();
@@ -272,6 +275,7 @@ class FavoritesAdapter extends BaseAdapter {
             if(list.get(i).getWord().equals(target)){
 
                 list.remove(i);
+                notifyDataSetChanged();
                 return;
 
             }
