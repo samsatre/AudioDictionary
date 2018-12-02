@@ -56,8 +56,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="390dp"
             android:ems="10"
-            android:inputType="textPassword"
-            android:text="password" />
+            android:inputType="textPassword" />
 
         <TextView
             android:id="@+id/passwordText"
@@ -133,8 +132,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="310dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Username" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editPasswordText"
@@ -144,8 +142,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="470dp"
             android:ems="10"
-            android:inputType="textPassword"
-            android:text="password" />
+            android:inputType="textPassword" />
         <Button
             android:id="@+id/settings_save_button"
             android:layout_height="wrap_content"

@@ -52,7 +52,6 @@ public class LoginActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        //mAuth.signOut();
         currentUser = mAuth.getCurrentUser();
 
         if(currentUser == null){
