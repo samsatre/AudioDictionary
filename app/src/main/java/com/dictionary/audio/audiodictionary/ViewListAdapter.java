@@ -93,6 +93,7 @@ public class ViewListAdapter extends ArrayAdapter {
                 StorageReference storageRef = storage.getReference();
                 Log.i("TAG",language + "/" + my_item.getRecordingId()+".3gp");
                 StorageReference audioRef = storageRef.child(language + "/" + my_item.getRecordingId()+".3gp");
+
                 final long ONE_MEGABYTE = 1024 * 1024;
                 //audioRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 try {
