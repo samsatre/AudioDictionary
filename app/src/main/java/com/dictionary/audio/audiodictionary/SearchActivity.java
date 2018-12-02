@@ -94,7 +94,8 @@ public class SearchActivity extends Activity {
         if (searchIntent != null && searchIntent.hasExtra(SearchManager.QUERY)) {
             String search = searchIntent.getStringExtra(SearchManager.QUERY);
             nativeSearch.setQuery(search, true);
-            language = learningLanguage + "-" + nativeLanguage;
+            language =  preferredSpinner.getSelectedItem().toString() + "-"
+                    + learningSpinner.getSelectedItem().toString();
             querySearched(search, language);
         }
 
