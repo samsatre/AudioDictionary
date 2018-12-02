@@ -6,6 +6,5 @@
     android:gravity="center_horizontal"
     android:text="Clear Favorites"
     android:textSize="20sp"
-
-    android:textColor="#ce3232"
-    android:typeface="serif"/>
+    android:textColor="@color/colorPrimaryDark"
+    android:textStyle="bold"/>

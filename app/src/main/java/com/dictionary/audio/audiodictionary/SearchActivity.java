@@ -155,23 +155,15 @@ public class SearchActivity extends Activity {
                 if (dataSnapshot.exists()) {
                     Log.i(TAG, "word exists");
 
-                    resultButton.setText(queryString);
-                    resultButton.setVisibility(TextView.VISIBLE);
-
                     addWordButton.setVisibility(Button.INVISIBLE);
                     resultText.setVisibility(View.INVISIBLE);
 
-                    resultButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent viewWordIntent = new Intent
-                                    (SearchActivity.this, ViewWord.class);
-                            viewWordIntent.putExtra("language", language);
-                            viewWordIntent.putExtra("word", queryString);
+                    Intent viewWordIntent = new Intent
+                            (SearchActivity.this, ViewWord.class);
+                    viewWordIntent.putExtra("language", language);
+                    viewWordIntent.putExtra("word", queryString);
 
-                            startActivity(viewWordIntent);
-                        }
-                    });
+                    startActivity(viewWordIntent);
 
 
                 } else {
