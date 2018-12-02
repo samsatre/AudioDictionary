@@ -22,6 +22,7 @@ public class HomeScreenActivity extends Activity {
     Button flashButton;
     TextView stat_msg;
     Button favoritesButton;
+    Button recentButton;
 
     private final String MyPrefs ="DictionaryPrefs";
     SharedPreferences mSp;
@@ -36,6 +37,8 @@ public class HomeScreenActivity extends Activity {
         addWordButton = findViewById(R.id.contributeButton);
         searchButton = findViewById(R.id.searchButton);
         //flashButton = findViewById(R.id.flashButton);
+        recentButton = findViewById(R.id.recentButton);
+
         stat_msg = findViewById(R.id.statText);
 
         mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
@@ -58,6 +61,15 @@ public class HomeScreenActivity extends Activity {
             public void onClick(View view) {
                 Intent nextIntent = new Intent(getApplicationContext(), SearchActivity.class);
                 startActivity(nextIntent);
+
+            }
+        });
+
+        recentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RecentlyAdded.class);
+                startActivity(intent);
 
             }
         });

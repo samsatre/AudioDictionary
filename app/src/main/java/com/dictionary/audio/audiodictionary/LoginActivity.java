@@ -234,25 +234,4 @@ public class LoginActivity extends Activity {
         }
 
     }
-
-    public static class Account {
-
-        public String photoURL;
-        public String displayName;
-
-        public Account(String photoURL, String displayName){
-
-            this.photoURL = photoURL;
-            this.displayName = displayName;
-
-        }
-        public Account(){
-
-            this.photoURL = null;
-            this.displayName = null;
-
-        }
-
-    }
-
 }

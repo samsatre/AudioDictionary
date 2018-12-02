@@ -29,7 +29,7 @@
         android:focusedByDefault="false"
         android:inputType="textAutoComplete"
         android:queryHint="@string/queryInNative" />
-
+    <!--
     <SearchView
         android:id="@+id/learningSearch"
         android:layout_width="match_parent"
@@ -42,14 +42,15 @@
         android:focusedByDefault="false"
         android:inputType="textAutoComplete"
         android:queryHint="@string/queryInLearning" />
+        -->
 
     <Button
         android:id="@+id/resultButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/learningSearch"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="232dp"
         android:background="#003e4649"
         android:text=""
         android:textAlignment="center"
@@ -59,9 +60,8 @@
         android:id="@+id/noResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/learningSearch"
+        android:layout_alignTop="@+id/resultButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:background="#003e4649"
         android:text="@string/noResults"
         android:textAlignment="center"
@@ -84,5 +84,28 @@
         android:textSize="20sp"
         android:textAlignment="center"
         android:text="@string/addWord" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="155dp">
+
+        <Spinner
+            android:id="@+id/search_choose_preferred"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:entries="@array/translateFrom"></Spinner>
+
+        <Spinner
+            android:id="@+id/search_choose_learning"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:entries="@array/translateFrom"></Spinner>
+    </LinearLayout>
+
 
 </RelativeLayout>

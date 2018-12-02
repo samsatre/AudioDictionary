@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -51,19 +52,33 @@ public class FavoritesActivity extends ListActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-               // mFavorites = dataSnapshot.getValue(Favorites.class);
-                HashMap<String,String> faves = (HashMap<String,String>)dataSnapshot.getValue();
-                Set<String> keyList = faves.keySet();
-                for(String key : keyList){
+                // mFavorites = dataSnapshot.getValue(Favorites.class);
+                if (dataSnapshot.getValue() != null) {
+                    HashMap<String, String> faves = (HashMap<String, String>) dataSnapshot.getValue();
+                    Set<String> keyList = faves.keySet();
+                    for (String key : keyList) {
 
-                    Word word = new Word();
-                    word.word = key;
-                    word.definitions = new ArrayList<>();
-                    word.definitions.add(faves.get(key));
-                    mAdapter.add(word);
+                        Word word = new Word();
+                        word.word = key;
+                        word.definitions = new ArrayList<>();
+                        word.definitions.add(faves.get(key));
+                        mAdapter.add(word);
+                    }
+                }
                     setListAdapter(mAdapter);
                     ListView lv = getListView();
-                    View footer = ((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.favorites_footer,null,false);
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            /*
+                            TODO implement logic for viewing word in viewword. Also which dictionary
+                            did the word come from?
+                             */
+
+                        }
+                    });
+                    View footer = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.favorites_footer, null, false);
                     lv.addFooterView(footer);
                     footer.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -71,22 +86,20 @@ public class FavoritesActivity extends ListActivity {
                             AlertDialog removealldialog = new AlertDialog.Builder(FavoritesActivity.this)
                                     .setTitle("Warning")
                                     .setMessage("Are you sure you want to clear favorites?")
-                                    .setPositiveButton("No",null)
+                                    .setPositiveButton("No", null)
                                     .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Toast.makeText(getApplicationContext(),"Clearing favorites!",Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), "Clearing favorites!", Toast.LENGTH_LONG).show();
                                             mAdapter.removeAll();
                                             final FirebaseDatabase database = FirebaseDatabase.getInstance();
                                             final DatabaseReference users = database.getReference("Favorites");
-                                            users.child(currentUser.getUid()).setValue(new HashMap<String,String>());
+
+                                            users.child(currentUser.getUid()).setValue(new HashMap<String, String>());
                                         }
                                     }).show();
                         }
                     });
-
-                }
-
             }
 
             @Override
