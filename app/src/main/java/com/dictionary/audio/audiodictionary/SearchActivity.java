@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -221,7 +222,12 @@ public class SearchActivity extends Activity {
                 startActivity(nextIntent2);
                 return true;
             case R.id.action_logout:
-                // TODO- actually log out
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
+                mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
+                mEdit = mSp.edit();
+                mEdit.clear();
+                mEdit.commit();
                 Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(nextIntent3);
                 return true;

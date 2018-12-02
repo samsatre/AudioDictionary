@@ -3,6 +3,7 @@ package com.dictionary.audio.audiodictionary;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,6 +26,10 @@ import java.util.List;
 public class RecentlyAdded extends Activity {
 
     private RecyclerView mRecyclerView;
+
+    private final String MyPrefs ="DictionaryPrefs";
+    SharedPreferences mSp;
+    SharedPreferences.Editor mEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +170,12 @@ public class RecentlyAdded extends Activity {
                 startActivity(nextIntent2);
                 return true;
             case R.id.action_logout:
-                // TODO- actually log out
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
+                mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
+                mEdit = mSp.edit();
+                mEdit.clear();
+                mEdit.commit();
                 Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(nextIntent3);
                 return true;

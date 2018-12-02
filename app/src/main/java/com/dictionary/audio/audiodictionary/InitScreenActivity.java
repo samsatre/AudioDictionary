@@ -84,7 +84,6 @@ public class InitScreenActivity extends Activity {
                         nextIntent.putExtra(STATE_LEARN, mLearnSpin.getSelectedItem().toString());
                         nextIntent.putExtra(STATE_PREFERRED,mPreferSpin.getSelectedItem().toString());
                         startActivity(nextIntent);
-                        // which is probably the search bar screen.
                     }
                 }
             });

@@ -1,7 +1,9 @@
 package com.dictionary.audio.audiodictionary;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,7 +11,13 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SettingsActivity extends Activity {
+
+    private final String MyPrefs ="DictionaryPrefs";
+    SharedPreferences mSp;
+    SharedPreferences.Editor mEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -37,7 +45,12 @@ public class SettingsActivity extends Activity {
                 startActivity(nextIntent2);
                 return true;
             case R.id.action_logout:
-                // TODO- actually log out
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
+                mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
+                mEdit = mSp.edit();
+                mEdit.clear();
+                mEdit.commit();
                 Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(nextIntent3);
                 return true;

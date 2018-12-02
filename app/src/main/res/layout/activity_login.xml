@@ -42,15 +42,17 @@
         android:id="@+id/loginbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:textColor="@color/text"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/password"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="15dp"
         android:text="Log in"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+
+        android:background="@color/colorPrimaryDark"
+        android:elevation="4dp"
+        android:textColor="#fff"/>
 
 
 

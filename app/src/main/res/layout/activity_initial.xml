@@ -50,12 +50,17 @@
     <Button
         android:id="@+id/initialSubmitButton"
         android:text="Submit"
-        android:textSize="30dp"
+        android:textSize="15dp"
         android:layout_width="150dp"
-        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_alignTop="@+id/initButtonAnchor"
-        android:layout_marginLeft="240dp"
-        android:layout_marginTop="-60dp"
+        android:layout_marginTop="400dp"
+
+        android:background="@color/colorPrimaryDark"
+        android:elevation="4dp"
+        android:textColor="#fff"
 
         />
 

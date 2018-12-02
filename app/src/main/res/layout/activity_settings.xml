@@ -59,7 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="65dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="117dp"
             android:entries="@array/preferArray"
             android:prompt="@string/choosePreferred"/>
@@ -69,8 +70,9 @@
             android:layout_width="255dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
+            android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="65dp"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="233dp"
             android:entries="@array/learnArray"
             android:prompt="@string/chooseLearn" />
@@ -79,9 +81,9 @@
             android:id="@+id/editUsernameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="158dp"
+            android:layout_marginTop="320dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Username" />
@@ -90,9 +92,9 @@
             android:id="@+id/editPasswordText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="79dp"
+            android:layout_marginTop="400dp"
             android:ems="10"
             android:inputType="textPassword"
             android:text="password"/>
@@ -100,9 +102,9 @@
         <Button
             android:id="@+id/button"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="500dp"
             android:text="@string/save"
 
             android:background="@color/colorPrimaryDark"
