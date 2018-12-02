@@ -49,7 +49,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="177dp"
-        android:text="My Favorites" />
+        android:text="@string/fav" />
 
     <Button
         android:id="@+id/recentButton"

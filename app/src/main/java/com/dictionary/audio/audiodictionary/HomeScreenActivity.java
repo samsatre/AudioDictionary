@@ -5,8 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -94,6 +98,28 @@ public class HomeScreenActivity extends Activity {
         int wordsAddedCount = mSp.getInt(STATE_ADDED, 0);
        // stat_msg.setText(R.string.stat_msg1 + wordsAddedCount + R.string.stat_msg2);
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent nextIntent = new Intent(getApplicationContext(),SettingsActivity.class);
+                startActivity(nextIntent);
+                return true;
+            case R.id.action_home:
+                Intent nextIntent2 = new Intent(getApplicationContext(),HomeScreenActivity.class);
+                startActivity(nextIntent2);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

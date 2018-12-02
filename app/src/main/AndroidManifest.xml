@@ -28,6 +28,7 @@
         <activity android:name=".TestHomePageActivity" />
         <activity android:name=".AddWord" />
         <activity android:name=".HomeScreenActivity" />
+        <activity android:name=".SettingsActivity" />
         <activity android:name=".LoadWords"/>
         <activity android:name=".FavoritesActivity">
             <intent-filter>

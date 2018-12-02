@@ -8,6 +8,9 @@ import android.app.ListActivity;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -141,5 +144,28 @@ public class ViewWord extends ListActivity {
         // Attach the adapter to a ListView
         this.getListView().setAdapter(mAdapter);
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent nextIntent = new Intent(getApplicationContext(),SettingsActivity.class);
+                startActivity(nextIntent);
+                return true;
+            case R.id.action_home:
+                Intent nextIntent2 = new Intent(getApplicationContext(),HomeScreenActivity.class);
+                startActivity(nextIntent2);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
 

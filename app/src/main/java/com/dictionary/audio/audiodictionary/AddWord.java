@@ -16,6 +16,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -358,5 +361,27 @@ public class AddWord extends Activity {
                 RECORD_AUDIO);
         return result == PackageManager.PERMISSION_GRANTED &&
                 result1 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent nextIntent = new Intent(getApplicationContext(),SettingsActivity.class);
+                startActivity(nextIntent);
+                return true;
+            case R.id.action_home:
+                Intent nextIntent2 = new Intent(getApplicationContext(),HomeScreenActivity.class);
+                startActivity(nextIntent2);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
