@@ -141,7 +141,6 @@ public class LoginActivity extends Activity {
                 }
 
             });
-
             mSignup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
@@ -177,10 +176,6 @@ public class LoginActivity extends Activity {
                                     Toast.makeText(getApplicationContext(),
                                             "Passwords do not match!", Toast.LENGTH_LONG).show();
                                 } else {
-                                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                    final DatabaseReference accountRef = database.getReference("Users");
-                                    String cleanedEmail = signupEmail.getText().toString().replaceAll("(\\.)", ",");
-
                                     //TODO check for prexisting accounts and other edge cases.
                                     mAuth.createUserWithEmailAndPassword(signupEmail.getText().toString(), signupPass.getText().toString())
                                             .addOnCompleteListener(LoginActivity.this,
@@ -200,14 +195,11 @@ public class LoginActivity extends Activity {
                                                                                         if (task.isSuccessful()) {
                                                                                             // Sign in success, update UI with the signed-in user's information
                                                                                             currentUser = mAuth.getCurrentUser();
-                                                                                            System.out.println("is current user null? " + currentUser == null);
-                                                                                            System.out.println(currentUser.getUid());
                                                                                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                                                                                     .setDisplayName(signupUser.getText().toString()).build();
                                                                                             currentUser.updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                                                 @Override
                                                                                                 public void onSuccess(Void aVoid) {
-                                                                                                    System.out.println(currentUser.getDisplayName());
                                                                                                     Intent initIntent = new Intent(getApplicationContext(), InitScreenActivity.class);
                                                                                                     startActivity(initIntent);
                                                                                                 }
