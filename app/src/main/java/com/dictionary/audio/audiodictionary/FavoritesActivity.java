@@ -178,7 +178,7 @@ class FavoritesAdapter extends BaseAdapter {
         if(convertView == null){
 
             holder = new ViewHolder();
-            //TODO make and change layout file for this.
+            //TODO edit layout file to match theme
             tempView = inflater.inflate(R.layout.favorites_list_view,parent,false);
             holder.word = tempView.findViewById(R.id.favorite_word);
             holder.description = tempView.findViewById(R.id.favorite_description);

@@ -151,10 +151,8 @@ public class AddWord extends Activity {
                             mediaRecorder.prepare();
                             mediaRecorder.start();
                         } catch (IllegalStateException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         } catch (IOException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
 
