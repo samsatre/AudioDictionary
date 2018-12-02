@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:text="Add to favorites"
+    android:text="Add to Favorites"
     android:textSize="20sp"
-
-    android:textColor="#ce3232"
-    android:typeface="serif"/>
+    android:textColor="@color/colorPrimaryDark"
+    android:textStyle="bold"/>

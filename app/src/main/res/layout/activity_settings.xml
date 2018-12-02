@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/nativeText"
@@ -14,67 +18,19 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="52dp"
             android:text="@string/native_lang"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorPrimaryDark"/>
 
-        <TextView
-            android:id="@+id/learnText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="158dp"
-            android:text="@string/learning_lang"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/usernameText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="280dp"
-            android:text="@string/edit_username"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/oldPasswordText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="360dp"
-            android:text="@string/old_pass"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/editOldPasswordText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="390dp"
-            android:ems="10"
-            android:inputType="textPassword" />
-
-        <TextView
-            android:id="@+id/passwordText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="440dp"
-            android:text="@string/new_pass"
-            android:textSize="20sp" />
 
         <RelativeLayout
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="89dp">
+            android:layout_marginTop="45dp"
+            android:layout_below="@+id/nativeText">
 
             <Spinner
                 android:id="@+id/nativeSpinner"
@@ -88,21 +44,32 @@
             <Button
                 android:id="@+id/settings_prefer_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/buttons"
                 android:elevation="4dp"
                 android:text="@string/save"
-                android:textColor="#fff" />
+                android:textColor="@color/white" />
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/learnText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nativeText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:text="@string/learning_lang"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"/>
+
         <RelativeLayout
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="197dp">
+            android:layout_marginTop="150dp">
 
             <Spinner
                 android:id="@+id/learnSpinner"
@@ -116,43 +83,155 @@
             <Button
                 android:id="@+id/settings_learn_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/buttons"
                 android:elevation="4dp"
                 android:text="@string/save"
                 android:textColor="#fff" />
         </RelativeLayout>
-        <EditText
-            android:id="@+id/editUsernameText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="310dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/editPasswordText"
-            android:layout_width="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="470dp"
-            android:ems="10"
-            android:inputType="textPassword" />
+            android:layout_below="@id/learnText"
+            android:layout_marginTop="50dp"
+            android:textColorHint="@color/text"
+            app:hintTextAppearance="@android:style/TextAppearance.Small"
+            >
+
+            <EditText
+                android:id="@+id/editUsernameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:hint="New Username" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/learnText"
+            android:layout_marginTop="100dp"
+            android:textColorHint="@color/text"
+            app:hintTextAppearance="@android:style/TextAppearance.Small"
+            >
+
+            <EditText
+                android:id="@+id/editOldPasswordText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:hint="Old Password"
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/learnText"
+            android:layout_marginTop="150dp"
+            android:textColorHint="@color/text"
+            app:hintTextAppearance="@android:style/TextAppearance.Small"
+            >
+
+            <EditText
+                android:id="@+id/editPasswordText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:hint="New Password"
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
+
         <Button
             android:id="@+id/settings_save_button"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_below="@id/learnText"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="530dp"
+            android:layout_marginTop="280dp"
             android:text="@string/saveall"
-            android:background="@color/colorPrimaryDark"
-            android:layout_width="250dp"
+            android:background="@color/buttons"
+            android:layout_width="match_parent"
             android:elevation="4dp"
-            android:textColor="#fff"/>
+            android:textColor="@color/white"/>
+
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/usernameText"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="280dp"-->
+            <!--android:text="@string/edit_username"-->
+            <!--android:textSize="20sp" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/oldPasswordText"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="360dp"-->
+            <!--android:text="@string/old_pass"-->
+            <!--android:textSize="20sp" />-->
+
+        <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/editOldPasswordText"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignParentTop="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_centerHorizontal="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginTop="390dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:ems="10"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:inputType="textPassword" />&ndash;&gt;-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/passwordText"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="440dp"-->
+            <!--android:text="@string/new_pass"-->
+            <!--android:textSize="20sp" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/editUsernameText"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="310dp"-->
+            <!--android:ems="10"-->
+            <!--android:inputType="textPersonName" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/editPasswordText"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="470dp"-->
+            <!--android:ems="10"-->
+            <!--android:inputType="textPassword" />-->
+        <!--<Button-->
+            <!--android:id="@+id/settings_save_button"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="530dp"-->
+            <!--android:text="@string/saveall"-->
+            <!--android:background="@color/colorPrimaryDark"-->
+            <!--android:layout_width="250dp"-->
+            <!--android:elevation="4dp"-->
+            <!--android:textColor="#fff"/>-->
     </RelativeLayout>
 </ScrollView>

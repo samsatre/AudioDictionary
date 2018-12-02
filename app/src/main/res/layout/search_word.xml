@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="15dp">
 
     <TextView
         android:id="@+id/searchTitle"
@@ -15,10 +15,9 @@
         android:layout_marginTop="15dp"
         android:text="@string/searchTitle"
         android:textAlignment="center"
-
-        android:textColor="#ce3232"
-        android:textSize="40sp"
-        android:typeface="serif"/>
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="30sp"
+        />
 
     <SearchView
         android:id="@+id/nativeSearch"
@@ -63,30 +62,27 @@
         android:id="@+id/noResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/resultButton"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/nativeSearch"
+        android:layout_marginTop="90dp"
         android:background="#003e4649"
         android:text="@string/noResults"
         android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/noResult"
-        android:text=""
-        android:textSize="200sp"/>
 
     <Button
         android:id="@+id/addWordButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/view"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/nativeSearch"
+        android:layout_marginTop="300dp"
+        android:background="@color/buttons"
         android:textSize="20sp"
         android:textAlignment="center"
-        android:text="@string/addWord" />
+        android:text="@string/addWord"
+        android:textColor="@color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -100,7 +96,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:entries="@array/translateFrom"></Spinner>
+            android:entries="@array/translateFrom">
+
+
+        </Spinner>
 
         <Spinner
             android:id="@+id/search_choose_learning"

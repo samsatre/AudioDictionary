@@ -11,12 +11,13 @@
 
     <TextView
         android:id="@+id/wordText"
-        android:layout_width="372dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="monospace"
         android:text="@string/currword"
         android:textAlignment="center"
         android:textSize="36sp"
-        android:typeface="normal" />
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        />
 
 </LinearLayout>
