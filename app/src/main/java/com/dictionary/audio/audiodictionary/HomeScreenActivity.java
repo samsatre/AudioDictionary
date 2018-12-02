@@ -19,7 +19,6 @@ public class HomeScreenActivity extends Activity {
     private final String STATE_ADDED = "wordsAddedCount";
     Button addWordButton;
     Button searchButton;
-    Button flashButton;
     TextView stat_msg;
     Button favoritesButton;
     Button recentButton;
@@ -36,7 +35,6 @@ public class HomeScreenActivity extends Activity {
 
         addWordButton = findViewById(R.id.contributeButton);
         searchButton = findViewById(R.id.searchButton);
-        //flashButton = findViewById(R.id.flashButton);
         recentButton = findViewById(R.id.recentButton);
 
         stat_msg = findViewById(R.id.statText);

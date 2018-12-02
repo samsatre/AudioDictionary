@@ -16,49 +16,69 @@
 
     <Button
         android:id="@+id/contributeButton"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:text="@string/add_word_button"
+
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="356dp"
+        android:elevation="4dp"
+        android:textColor="#fff"
         />
 
     <Button
         android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="189dp"
-        android:text="@string/search_button" />
+        android:layout_marginTop="180dp"
+        android:text="@string/search_button"
+
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="356dp"
+        android:elevation="4dp"
+        android:textColor="#fff"/>
 
     <Button
         android:id="@+id/randButton"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="277dp"
-        android:text="@string/rand_button" />
+        android:layout_marginTop="260dp"
+        android:text="@string/rand_button"
+
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="356dp"
+        android:elevation="4dp"
+        android:textColor="#fff"/>
 
     <Button
         android:id="@+id/favoritesButton"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="177dp"
-        android:text="@string/fav" />
+        android:layout_marginTop="340dp"
+        android:text="@string/fav"
+
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="356dp"
+        android:elevation="4dp"
+        android:textColor="#fff"/>
 
     <Button
         android:id="@+id/recentButton"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="77dp"
-        android:text="Recently Added" />
+        android:layout_marginTop="420dp"
+        android:text="@string/recent_button"
+
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="356dp"
+        android:elevation="4dp"
+        android:textColor="#fff"/>
 
 
 </RelativeLayout>
