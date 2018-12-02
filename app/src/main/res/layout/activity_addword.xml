@@ -140,8 +140,21 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:background="@color/buttons"
+        android:elevation="4dp"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:text="@string/record_start"
+        android:textColor="#fff" />
+
+    <Button
         android:id="@+id/submit"
-        android:layout_width="356dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="@color/buttons"
@@ -150,5 +163,9 @@
         android:paddingRight="70dp"
         android:text="Submit"
         android:textColor="@color/white" />
+
+
+
+
 
 </LinearLayout>
