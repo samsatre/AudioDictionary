@@ -1,19 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/action_settings"
-        android:title="Settings"
-        android:tooltipText="Go to settings screen"/>
-
-    <item
-        android:id="@+id/action_home"
-        android:title="Go Home"
+    <item android:id="@+id/action_home"
+        android:title="@string/action_home"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_baseline_home_24dp"
         android:tooltipText="Go to home screen"/>
 
-    <item
-        android:id="@+id/action_logout"
-        android:title="Logout"
+    <item android:id="@+id/action_logout"
+        android:title="@string/action_logout"
+        android:showAsAction="never"
         android:tooltipText="Logout from app"/>
+
+    <!-- Settings, should always be in the overflow -->
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:showAsAction="never"
+        android:tooltipText="Go to the settings screen"/>
 
 </menu>
