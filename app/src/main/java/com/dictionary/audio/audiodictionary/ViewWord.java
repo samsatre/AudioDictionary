@@ -2,7 +2,6 @@ package com.dictionary.audio.audiodictionary;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.ListActivity;
@@ -38,10 +37,6 @@ public class ViewWord extends ListActivity {
     private static String word;
     List<String> definitions;
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-    private final String MyPrefs ="DictionaryPrefs";
-    SharedPreferences mSp;
-    SharedPreferences.Editor mEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,12 +163,8 @@ public class ViewWord extends ListActivity {
                 startActivity(nextIntent2);
                 return true;
             case R.id.action_logout:
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                mAuth.signOut();
-                mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
-                mEdit = mSp.edit();
-                mEdit.clear();
-                mEdit.commit();
+
+                FirebaseAuth.getInstance().signOut();
                 Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(nextIntent3);
                 return true;

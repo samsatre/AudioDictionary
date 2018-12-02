@@ -8,16 +8,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingsActivity extends Activity {
 
-    private final String MyPrefs ="DictionaryPrefs";
+    Button mSaveBtn;
+    Button mSavePref;
+    Button mSaveLearn;
+    Spinner preferSpin;
+    Spinner learnSpin;
     SharedPreferences mSp;
     SharedPreferences.Editor mEdit;
+    private final String MyPrefs ="DictionaryPrefs";
+    private final String STATE_PREFERRED = "preferred";
+    private final String STATE_LEARN = "learn";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -25,6 +36,59 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        mSaveBtn = findViewById(R.id.settings_save_button);
+        mSavePref = findViewById(R.id.settings_prefer_btn);
+        mSaveLearn = findViewById(R.id.settings_learn_btn);
+        preferSpin = findViewById(R.id.nativeSpinner);
+        learnSpin = findViewById(R.id.learnSpinner);
+        mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
+        mEdit = mSp.edit();
+        String nativeLanguage = mSp.getString(STATE_PREFERRED,"not found prefer");
+        String learningLanguage = mSp.getString(STATE_LEARN,"not found learn");
+        learnSpin.setSelection(getIndex(learnSpin,learningLanguage));
+        preferSpin.setSelection(getIndex(preferSpin,nativeLanguage));
+
+        mSavePref.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mEdit.putString(STATE_PREFERRED,preferSpin.getSelectedItem().toString());
+                mEdit.commit();
+                Toast.makeText(getApplicationContext(),"Prefered language saved!",Toast.LENGTH_LONG).show();
+
+            }
+        });
+        mSaveLearn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mEdit.putString(STATE_LEARN,learnSpin.getSelectedItem().toString());
+                mEdit.commit();
+                Toast.makeText(getApplicationContext(),"Language to learn saved!",Toast.LENGTH_LONG).show();
+
+
+            }
+        });
+
+        /*
+        TODO implement change username and password
+         */
+
+
+
+
+    }
+
+    private int getIndex(Spinner spinner, String target){
+
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(target)){
+                index = i;
+            }
+        }
+        return index;
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -45,12 +109,7 @@ public class SettingsActivity extends Activity {
                 startActivity(nextIntent2);
                 return true;
             case R.id.action_logout:
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                mAuth.signOut();
-                mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
-                mEdit = mSp.edit();
-                mEdit.clear();
-                mEdit.commit();
+                FirebaseAuth.getInstance().signOut();
                 Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(nextIntent3);
                 return true;

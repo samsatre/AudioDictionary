@@ -5,7 +5,6 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -39,10 +38,6 @@ public class FavoritesActivity extends ListActivity {
     private FirebaseAuth mAuth;
     FirebaseUser currentUser;
     Favorites mFavorites;
-
-    private final String MyPrefs ="DictionaryPrefs";
-    SharedPreferences mSp;
-    SharedPreferences.Editor mEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -134,12 +129,7 @@ public class FavoritesActivity extends ListActivity {
                 startActivity(nextIntent2);
                 return true;
             case R.id.action_logout:
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                mAuth.signOut();
-                mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
-                mEdit = mSp.edit();
-                mEdit.clear();
-                mEdit.commit();
+                FirebaseAuth.getInstance().signOut();
                 Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(nextIntent3);
                 return true;
@@ -188,7 +178,7 @@ class FavoritesAdapter extends BaseAdapter {
         if(convertView == null){
 
             holder = new ViewHolder();
-            //TODO make and change layout file for this.
+            //TODO edit layout file to match theme
             tempView = inflater.inflate(R.layout.favorites_list_view,parent,false);
             holder.word = tempView.findViewById(R.id.favorite_word);
             holder.description = tempView.findViewById(R.id.favorite_description);

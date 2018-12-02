@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-//TODO DO NOT RUN THIS CLASS WITHOUT INIT CLASS.
 public class TestHomePageActivity extends Activity{
 
     private final String STATE_PREFERRED = "preferred";

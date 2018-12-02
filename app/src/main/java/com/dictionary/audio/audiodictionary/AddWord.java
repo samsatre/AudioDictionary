@@ -151,10 +151,8 @@ public class AddWord extends Activity {
                             mediaRecorder.prepare();
                             mediaRecorder.start();
                         } catch (IllegalStateException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         } catch (IOException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
 
@@ -211,7 +209,14 @@ public class AddWord extends Activity {
                 final String w = word.getText().toString();
                 final String d = definition.getText().toString();
                 final String s = sentence.getText().toString();
-
+                if (mSp.contains(STATE_ADDED)) {
+                    int wordsAddedCount = mSp.getInt(STATE_ADDED, 0);
+                    mEdit.putInt(STATE_ADDED, (wordsAddedCount+1));
+                    mEdit.commit();
+                } else {
+                    mEdit.putInt(STATE_ADDED, 1);
+                    mEdit.commit();
+                }
                 if(w.length() == 0) {
                     Toast.makeText(AddWord.this, "Please add a Word",
                             Toast.LENGTH_LONG).show();
@@ -373,12 +378,7 @@ public class AddWord extends Activity {
                 startActivity(nextIntent2);
                 return true;
             case R.id.action_logout:
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                mAuth.signOut();
-                mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
-                mEdit = mSp.edit();
-                mEdit.clear();
-                mEdit.commit();
+                FirebaseAuth.getInstance().signOut();
                 Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(nextIntent3);
                 return true;

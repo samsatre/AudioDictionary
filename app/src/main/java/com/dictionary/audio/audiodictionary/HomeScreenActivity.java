@@ -18,8 +18,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeScreenActivity extends Activity {
 
+    private final String STATE_ADDED = "wordsAddedCount";
     Button addWordButton;
     Button searchButton;
+    TextView stat_msg;
     Button favoritesButton;
     Button recentButton;
 
@@ -37,8 +39,13 @@ public class HomeScreenActivity extends Activity {
         searchButton = findViewById(R.id.searchButton);
         recentButton = findViewById(R.id.recentButton);
 
+        stat_msg = findViewById(R.id.statText);
+
         mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
         mEdit = mSp.edit();
+
+        int wordsAddedCount = mSp.getInt(STATE_ADDED, 0);
+        //stat_msg.setText(R.string.stat_msg1 + wordsAddedCount + R.string.stat_msg2);
 
         addWordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +83,25 @@ public class HomeScreenActivity extends Activity {
             }
         });
 
+        /*
+        TODO implement random word feature
+         */
+
+    }
+
+    @Override
+    public void onResume(){
+
+        super.onResume();
+
+        stat_msg = findViewById(R.id.statText);
+
+        mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
+        mEdit = mSp.edit();
+
+        int wordsAddedCount = mSp.getInt(STATE_ADDED, 0);
+       // stat_msg.setText(R.string.stat_msg1 + wordsAddedCount + R.string.stat_msg2);
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -96,12 +122,7 @@ public class HomeScreenActivity extends Activity {
                 startActivity(nextIntent2);
                 return true;
             case R.id.action_logout:
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                mAuth.signOut();
-                mSp = getSharedPreferences(MyPrefs, Context.MODE_PRIVATE);
-                mEdit = mSp.edit();
-                mEdit.clear();
-                mEdit.commit();
+                FirebaseAuth.getInstance().signOut();
                 Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(nextIntent3);
                 return true;
