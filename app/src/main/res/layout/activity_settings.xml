@@ -15,7 +15,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="52dp"
-            android:text="Preferred Language"
+            android:text="Preferred Language:"
             android:textSize="20sp" />
 
         <TextView
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:entries="@array/preferArray"
+                android:entries="@array/learnArrayAlt"
                 android:prompt="@string/choosePreferred" />
 
             <Button
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:entries="@array/learnArray"
+                android:entries="@array/learnArrayAlt"
                 android:prompt="@string/chooseLearn" />
 
             <Button
