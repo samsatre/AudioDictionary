@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp">
 
-
-    <EditText
-        android:id="@+id/username"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="100dp"
-        android:fontFamily="sans-serif"
-        android:hint="Email address"
-        android:inputType="textEmailAddress"
-        android:textSize="15dp"
-        android:typeface="normal" />
+        android:layout_marginTop="70dp"
+        android:textColorHint="@color/text"
+        app:hintTextAppearance="@android:style/TextAppearance.Small"
+        >
 
-    <EditText
-        android:id="@+id/password"
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:hint="Email Address"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/username"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif"
-        android:hint="Password"
-        android:inputType="textWebPassword"
-        android:textSize="15dp"
-        android:typeface="normal" />
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/text"
+        app:hintTextAppearance="@android:style/TextAppearance.Small"
+        >
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:textColor="@color/colorPrimary"
+            android:inputType="textWebPassword"/>
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/loginbutton"
@@ -44,23 +49,18 @@
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:textColor="@color/text"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/password"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal"
         android:text="Log in"
-        android:textSize="15sp" />
-
+        android:textSize="20sp"
+        android:layout_marginTop="10dp" />
 
 
     <TextView
         android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/loginbutton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:text="@string/login_forgot"
         android:textColor="@color/colorPrimary"
         android:textSize="15sp" />
@@ -71,14 +71,9 @@
         android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:text="Don't have an account? Sign up here!"
-        android:textSize="15sp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="150dp"
+        android:text="@string/SignUp"
+        android:textSize="15sp" />
 
-
-        />
-
-</RelativeLayout>
+</LinearLayout>

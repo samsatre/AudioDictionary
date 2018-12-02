@@ -1,115 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="350dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="475dp"
-    android:layout_gravity="center"
-    >
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
 
-    <EditText
-        android:id="@+id/signup_username"
-        android:layout_width="320dp"
-        android:layout_height="60dp"
-        android:inputType="textAutoComplete"
-        android:layout_alignTop="@id/anchorSignup"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-65dp"
-        android:background="@drawable/loginedittextborder"
-        />
-    <EditText
-        android:id="@+id/signup_password"
-        android:layout_width="320dp"
-        android:layout_height="60dp"
-        android:inputType="textWebPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_alignBottom="@id/anchorSignup"
-        android:layout_marginBottom="-65dp"
-        android:background="@drawable/loginedittextborder"
-        />
 
-    <EditText
-        android:id="@+id/signup_confirm_password"
-        android:layout_width="320dp"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="104dp"
-        android:background="@drawable/loginedittextborder"
-        android:inputType="textWebPassword" />
-    <EditText
-        android:id="@+id/signup_email"
-        android:layout_width="320dp"
-        android:layout_height="60dp"
-        android:layout_alignTop="@id/signup_username"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-85dp"
-        android:background="@drawable/loginedittextborder"
-        />
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Email Address"
-        android:textSize="20sp"
-        android:textColor="@color/common_google_signin_btn_text_light"
-        android:layout_alignTop="@id/signup_email"
-        android:layout_alignLeft="@id/signup_email"
-        android:layout_marginTop="-25dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
+        android:textColorHint="@color/text"
+        app:hintTextAppearance="@android:style/TextAppearance.Small"
+        >
+
+        <EditText
+            android:id="@+id/signup_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoComplete"
+            android:textColor="@color/colorPrimary"
+            android:hint="Enter Email Address"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Choose Username"
-        android:textSize="20sp"
-        android:textColor="@color/common_google_signin_btn_text_light"
-        android:layout_alignTop="@id/signup_username"
-        android:layout_alignLeft="@id/signup_username"
-        android:layout_marginTop="-25dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/text"
+        app:hintTextAppearance="@android:style/TextAppearance.Small"
+        >
+
+        <EditText
+            android:id="@+id/signup_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoComplete"
+            android:textColor="@color/colorPrimary"
+            android:hint="Username"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Choose Password"
-        android:textSize="20sp"
-        android:textColor="@color/common_google_signin_btn_text_light"
-        android:layout_alignTop="@id/signup_password"
-        android:layout_alignLeft="@id/signup_password"
-        android:layout_marginTop="-25dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/text"
+        app:hintTextAppearance="@android:style/TextAppearance.Small"
+        >
+
+        <EditText
+            android:id="@+id/signup_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoComplete"
+            android:textColor="@color/colorPrimary"
+            android:hint="Password"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirm Password"
-        android:textSize="20sp"
-        android:textColor="@color/common_google_signin_btn_text_light"
-        android:layout_alignTop="@id/signup_confirm_password"
-        android:layout_alignLeft="@id/signup_confirm_password"
-        android:layout_marginTop="-25dp"
-        />
-    <View
-        android:id="@+id/anchorSignup"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_alignTop="@id/anchorAnchorSignup"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-30dp"
-        />
-    <View
-        android:id="@+id/anchorAnchorSignup"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/text"
+        app:hintTextAppearance="@android:style/TextAppearance.Small"
+        >
+
+        <EditText
+            android:id="@+id/signup_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoComplete"
+            android:textColor="@color/colorPrimary"
+            android:hint="Confirm password"
+            />
+
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/signup_submit_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="28dp"
-        android:layout_marginEnd="47dp"
+        android:layout_marginTop="40dp"
         android:text="Submit"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:background="@color/colorAccent"/>
 
-</RelativeLayout>
+
+</LinearLayout>
+
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout    -->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="350dp"-->
+    <!--android:layout_height="475dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--&gt;-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/signup_username"-->
+        <!--android:layout_width="320dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:inputType="textAutoComplete"-->
+        <!--android:layout_alignTop="@id/anchorSignup"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="-65dp"-->
+        <!--android:background="@drawable/loginedittextborder"-->
+        <!--/>-->
+    <!--<EditText-->
+        <!--android:id="@+id/signup_password"-->
+        <!--android:layout_width="320dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:inputType="textWebPassword"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_alignBottom="@id/anchorSignup"-->
+        <!--android:layout_marginBottom="-65dp"-->
+        <!--android:background="@drawable/loginedittextborder"-->
+        <!--/>-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/signup_confirm_password"-->
+        <!--android:layout_width="320dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="104dp"-->
+        <!--android:background="@drawable/loginedittextborder"-->
+        <!--android:inputType="textWebPassword" />-->
+    <!--<EditText-->
+        <!--android:id="@+id/signup_email"-->
+        <!--android:layout_width="320dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_alignTop="@id/signup_username"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="-85dp"-->
+        <!--android:background="@drawable/loginedittextborder"-->
+        <!--/>-->
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Enter Email Address"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textColor="@color/common_google_signin_btn_text_light"-->
+        <!--android:layout_alignTop="@id/signup_email"-->
+        <!--android:layout_alignLeft="@id/signup_email"-->
+        <!--android:layout_marginTop="-25dp"-->
+        <!--/>-->
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Choose Username"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textColor="@color/common_google_signin_btn_text_light"-->
+        <!--android:layout_alignTop="@id/signup_username"-->
+        <!--android:layout_alignLeft="@id/signup_username"-->
+        <!--android:layout_marginTop="-25dp"-->
+        <!--/>-->
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Choose Password"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textColor="@color/common_google_signin_btn_text_light"-->
+        <!--android:layout_alignTop="@id/signup_password"-->
+        <!--android:layout_alignLeft="@id/signup_password"-->
+        <!--android:layout_marginTop="-25dp"-->
+        <!--/>-->
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Confirm Password"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textColor="@color/common_google_signin_btn_text_light"-->
+        <!--android:layout_alignTop="@id/signup_confirm_password"-->
+        <!--android:layout_alignLeft="@id/signup_confirm_password"-->
+        <!--android:layout_marginTop="-25dp"-->
+        <!--/>-->
+    <!--<View-->
+        <!--android:id="@+id/anchorSignup"-->
+        <!--android:layout_width="20dp"-->
+        <!--android:layout_height="20dp"-->
+        <!--android:layout_alignTop="@id/anchorAnchorSignup"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="-30dp"-->
+        <!--/>-->
+    <!--<View-->
+        <!--android:id="@+id/anchorAnchorSignup"-->
+        <!--android:layout_width="20dp"-->
+        <!--android:layout_height="20dp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/signup_submit_btn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_marginBottom="28dp"-->
+        <!--android:layout_marginEnd="47dp"-->
+        <!--android:text="Submit"-->
+        <!--android:textSize="20sp" />-->
+
+<!--</RelativeLayout>-->

@@ -8,5 +8,6 @@
     <color name="colorBlackBorder">#000000</color>
     <color name="colorBlueForgot">#1768ea</color>
     <color name="text">#32322C</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>
