@@ -5,5 +5,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:text="Add to favorites"
-    android:textColor="@color/colorBlackBorder"
-    android:textSize="20sp" />
+    android:textSize="20sp"
+
+    android:textColor="#ce3232"
+    android:typeface="serif"/>

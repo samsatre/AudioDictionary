@@ -15,7 +15,10 @@
         android:layout_marginTop="15dp"
         android:text="@string/searchTitle"
         android:textAlignment="center"
-        android:textSize="30sp"/>
+
+        android:textColor="#ce3232"
+        android:textSize="40sp"
+        android:typeface="serif"/>
 
     <SearchView
         android:id="@+id/nativeSearch"
