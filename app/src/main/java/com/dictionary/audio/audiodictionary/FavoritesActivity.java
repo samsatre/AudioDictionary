@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,43 +15,95 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 public class FavoritesActivity extends ListActivity {
 
     FavoritesAdapter mAdapter;
+    private FirebaseAuth mAuth;
+    FirebaseUser currentUser;
+    Favorites mFavorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
         mAdapter = new FavoritesAdapter(getApplicationContext());
-        setListAdapter(mAdapter);
-        ListView lv = getListView();
-        View footer = ((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.favorites_footer,null,false);
-        lv.addFooterView(footer);
-        footer.setOnClickListener(new View.OnClickListener() {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference users = database.getReference("Favorites");
+        users.child(currentUser.getUid()).getRef().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                AlertDialog removealldialog = new AlertDialog.Builder(FavoritesActivity.this)
-                        .setTitle("Warning")
-                        .setMessage("Are you sure you want to clear favorites?")
-                        .setPositiveButton("No",null)
-                        .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(),"Clearing favorites!",Toast.LENGTH_LONG).show();
-                                mAdapter.removeAll();
-                            }
-                        }).show();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+               // mFavorites = dataSnapshot.getValue(Favorites.class);
+                HashMap<String,String> faves = (HashMap<String,String>)dataSnapshot.getValue();
+                Set<String> keyList = faves.keySet();
+                for(String key : keyList){
+
+                    Word word = new Word();
+                    word.word = key;
+                    word.definitions = new ArrayList<>();
+                    word.definitions.add(faves.get(key));
+                    mAdapter.add(word);
+                    setListAdapter(mAdapter);
+                    ListView lv = getListView();
+                    View footer = ((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.favorites_footer,null,false);
+                    lv.addFooterView(footer);
+                    footer.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AlertDialog removealldialog = new AlertDialog.Builder(FavoritesActivity.this)
+                                    .setTitle("Warning")
+                                    .setMessage("Are you sure you want to clear favorites?")
+                                    .setPositiveButton("No",null)
+                                    .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Toast.makeText(getApplicationContext(),"Clearing favorites!",Toast.LENGTH_LONG).show();
+                                            mAdapter.removeAll();
+                                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                            final DatabaseReference users = database.getReference("Favorites");
+                                            users.child(currentUser.getUid()).setValue(new HashMap<String,String>());
+                                        }
+                                    }).show();
+                        }
+                    });
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
+
     }
+}
 
+class Favorites{
 
+    HashMap<String,String> favorites;
+
+    protected Favorites(){
+
+        this.favorites = new HashMap<>();
+
+    }
 
 }
 class FavoritesAdapter extends BaseAdapter {
@@ -81,7 +134,7 @@ class FavoritesAdapter extends BaseAdapter {
 
             holder = new ViewHolder();
             //TODO make and change layout file for this.
-            tempView = inflater.inflate(R.layout.activity_addword,parent,false);
+            tempView = inflater.inflate(R.layout.favorites_list_view,parent,false);
             holder.word = tempView.findViewById(R.id.favorite_word);
             holder.description = tempView.findViewById(R.id.favorite_description);
             tempView.setTag(holder);

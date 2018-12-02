@@ -52,7 +52,7 @@ public class LoginActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        mAuth.signOut();
+        //mAuth.signOut();
         currentUser = mAuth.getCurrentUser();
 
         if(currentUser == null){
@@ -169,15 +169,19 @@ public class LoginActivity extends Activity {
                                                                                     if (task.isSuccessful()) {
                                                                                         // Sign in success, update UI with the signed-in user's information
                                                                                         currentUser = mAuth.getCurrentUser();
-                                                                                        System.out.println("is current user null? " + currentUser == null);
-                                                                                        System.out.println(currentUser.getUid());
                                                                                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                                                                                 .setDisplayName(signupUser.getText().toString()).build();
                                                                                         currentUser.updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                                             @Override
                                                                                             public void onSuccess(Void aVoid) {
                                                                                                 System.out.println(currentUser.getDisplayName());
+                                                                                                System.out.println(currentUser.getUid());
                                                                                                 Intent initIntent = new Intent(getApplicationContext(),InitScreenActivity.class);
+                                                                                                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                                                                                final DatabaseReference accountRef = database.getReference("Favorites");
+                                                                                                HashMap<String,String> map = new HashMap<>();
+                                                                                                map.put("hello","world");
+                                                                                                accountRef.child(currentUser.getUid().toString()).setValue(map);
                                                                                                 startActivity(initIntent);
                                                                                             }
                                                                                         });
