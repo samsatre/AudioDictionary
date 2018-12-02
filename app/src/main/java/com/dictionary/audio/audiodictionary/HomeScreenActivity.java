@@ -83,6 +83,10 @@ public class HomeScreenActivity extends Activity {
             }
         });
 
+        /*
+        TODO implement random word feature
+         */
+
     }
 
     @Override

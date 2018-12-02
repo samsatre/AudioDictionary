@@ -70,6 +70,10 @@ public class SettingsActivity extends Activity {
             }
         });
 
+        /*
+        TODO implement change username and password
+         */
+
 
 
 
