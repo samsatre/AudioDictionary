@@ -168,7 +168,7 @@ public class AddWord extends Activity {
 
                     recordAudio.setText(R.string.record_start);
                     recordAudio.setBackgroundColor
-                            (getResources().getColor(R.color.colorPrimaryDark, null));
+                            (getResources().getColor(R.color.buttons, null));
                     recordAudio.setVisibility(View.GONE);
                     replay.setVisibility(View.VISIBLE);
                 }
@@ -248,9 +248,7 @@ public class AddWord extends Activity {
                     childRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Toast.makeText(AddWord.this,
-                                    "dataSnapshot exists: " + dataSnapshot.exists(),
-                                    Toast.LENGTH_LONG).show();
+
 
                             if (!dataSnapshot.exists()) {
                                 String uid = UUID.randomUUID().toString();
@@ -276,9 +274,9 @@ public class AddWord extends Activity {
                                         (List<String>) dataSnapshot.child("definitions").getValue()
                                 );
 
+                                wordData.definitions.add(d);
                                 wordData.recordings.add(new Pair<String, Integer>(fileName, 0));
-                                if (!wordData.sentences.contains(s))
-                                    wordData.sentences.add(s);
+                                wordData.sentences.add(s);
 
                                 myRef.child(w).setValue(wordData);
                             }
