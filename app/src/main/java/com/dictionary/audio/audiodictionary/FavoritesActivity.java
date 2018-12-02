@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
 
 public class FavoritesActivity extends ListActivity {
@@ -38,6 +39,10 @@ public class FavoritesActivity extends ListActivity {
     private FirebaseAuth mAuth;
     FirebaseUser currentUser;
     Favorites mFavorites;
+    int idx;
+    Word myWord;
+    String currLanguage;
+    ArrayList<String> languages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -67,17 +72,6 @@ public class FavoritesActivity extends ListActivity {
                 }
                     setListAdapter(mAdapter);
                     ListView lv = getListView();
-                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                            /*
-                            TODO implement logic for viewing word in viewword. Also which dictionary
-                            did the word come from?
-                             */
-
-                        }
-                    });
                     View footer = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.favorites_footer, null, false);
                     lv.addFooterView(footer);
                     footer.setOnClickListener(new View.OnClickListener() {
