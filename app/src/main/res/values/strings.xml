@@ -5,40 +5,50 @@
     <string name="recordWord">Record Word</string>
     <string name="addSentence">Sentence with Word</string>
     <string name="chooseLearn">Language to Learn</string>
-    <string name="choosePreferred">Preferred Language</string>
+    <string name="choosePreferred">Native Language</string>
     <string name="record_start">Start Recording Audio</string>
     <string name="record_stop">Stop Recording Audio</string>
     <string name="login_forgot"> <u>Forgot your password?</u> </string>
     <string name="currword">CurrWord</string>
     <string name="translated">Translation</string>
-    <string name="Play">PlayBtn</string>
+    <string name="Play">Play Audio</string>
     <string name="sentence1">sentence</string>
     <string name="queryInNative">Word in Native Language</string>
     <string name="queryInLearning">Word in Learning Language</string>
     <string name="searchTitle">Search for Word</string>
     <string name="noResults">No Results Found</string>
     <string name="SignUp">"Don't have an account? Sign up here!"</string>
+    <string name="choose1">Choose your native language:</string>
+    <string name="choose2">Choose a language to learn:</string>
 
     <string name="native_lang">Native Language:</string>
     <string name="learning_lang">Language to Learn:</string>
-    <string name="stat_msg">You have contributed 0 words!</string>
-    <string name="stat_msg1">You have contributed </string>
-    <string name="stat_msg2"> words!</string>
     <string name="add_word_button">Add More Words</string>
     <string name="search_button">Search New Words</string>
     <string name="rand_button">Learn Random Words</string>
     <string name="username_txt">Username:</string>
     <string name="password_txt">Password:</string>
     <string name="save">Save Changes</string>
+    <string name="fav">My Favorites</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_home">Home</string>
+    <string name="action_logout">Log Out</string>
+    <string name="recent_button">Recently Added</string>
+    <string name="title">AudioDictionary</string>
 
     <string-array name="learnArray">
-        <item>Language to Learn</item>
+    <item>Language to Learn</item>
+    <item>English</item>
+    <item>Spanish</item>
+    <item>French</item>
+</string-array>
+    <string-array name="learnArrayAlt">
         <item>English</item>
         <item>Spanish</item>
         <item>French</item>
     </string-array>
     <string-array name="preferArray">
-        <item>Preferred Language</item>
+        <item>Native Language</item>
         <item>English</item>
         <item>Spanish</item>
         <item>French</item>

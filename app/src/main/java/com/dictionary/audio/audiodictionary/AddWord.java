@@ -16,6 +16,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -147,10 +151,8 @@ public class AddWord extends Activity {
                             mediaRecorder.prepare();
                             mediaRecorder.start();
                         } catch (IllegalStateException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         } catch (IOException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
 
@@ -207,7 +209,6 @@ public class AddWord extends Activity {
                 final String w = word.getText().toString();
                 final String d = definition.getText().toString();
                 final String s = sentence.getText().toString();
-
                 if (mSp.contains(STATE_ADDED)) {
                     int wordsAddedCount = mSp.getInt(STATE_ADDED, 0);
                     mEdit.putInt(STATE_ADDED, (wordsAddedCount+1));
@@ -216,7 +217,6 @@ public class AddWord extends Activity {
                     mEdit.putInt(STATE_ADDED, 1);
                     mEdit.commit();
                 }
-
                 if(w.length() == 0) {
                     Toast.makeText(AddWord.this, "Please add a Word",
                             Toast.LENGTH_LONG).show();
@@ -358,5 +358,32 @@ public class AddWord extends Activity {
                 RECORD_AUDIO);
         return result == PackageManager.PERMISSION_GRANTED &&
                 result1 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent nextIntent = new Intent(getApplicationContext(),SettingsActivity.class);
+                startActivity(nextIntent);
+                return true;
+            case R.id.action_home:
+                Intent nextIntent2 = new Intent(getApplicationContext(),HomeScreenActivity.class);
+                startActivity(nextIntent2);
+                return true;
+            case R.id.action_logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(nextIntent3);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

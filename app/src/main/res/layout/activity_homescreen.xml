@@ -43,7 +43,7 @@
         android:layout_below="@id/contributeButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:text="@string/stat_msg"
+        android:text="You have added 0 words"
         android:textSize="18sp"
         />
 
@@ -75,6 +75,19 @@
         android:text="Random Words"
         android:textColor="@color/white" />
 
+    <Button
+        android:id="@+id/recentButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/randButton"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="Recently Added"
+        android:textColor="@color/white"
+        android:drawableLeft="@drawable/ic_recent"/>
 
 
 

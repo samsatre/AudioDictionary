@@ -2,6 +2,7 @@ package com.dictionary.audio.audiodictionary;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -11,6 +12,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,12 +22,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -51,22 +58,19 @@ public class LoadWords extends Activity {
 
         firebaseStorage = FirebaseStorage.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_languages);
+        mRecyclerView = findViewById(R.id.recycler_view_languages);
 
         //WordAdapter adapter = new WordAdapter();
 
         String language = getIntent().getStringExtra("language");
 
-        querySearched(language+"-French");
-
+        querySearched(language);
     }
 
 
     private void querySearched (final String language) {
 
         databaseReference = firebaseDatabase.getReference(language);
-       // DatabaseReference childRef = databaseReference.getRef();
-
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -74,6 +78,7 @@ public class LoadWords extends Activity {
                     //readData(dataSnapshot);
                     System.out.println();
                     new LoadRV(dataSnapshot, language).execute();
+
 
                 } else {
 
@@ -111,6 +116,8 @@ public class LoadWords extends Activity {
     public class WordAdapter extends
             RecyclerView.Adapter<WordAdapter.ViewHolder> {
 
+        private View.OnClickListener mClickListener;
+
         // Provide a direct reference to each of the views within a data item
         // Used to cache the views within the item layout for fast access
         public class ViewHolder extends RecyclerView.ViewHolder {
@@ -129,6 +136,7 @@ public class LoadWords extends Activity {
                 definitionView = itemView.findViewById(R.id.definitionText);
                 pronounciation = itemView.findViewById(R.id.speaker);
             }
+
         }
 
 
@@ -155,6 +163,10 @@ public class LoadWords extends Activity {
             return viewHolder;
         }
 
+        public void setClickListener(View.OnClickListener callback) {
+            mClickListener = callback;
+        }
+
         // Involves populating data into the item through holder
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int position) {
@@ -173,35 +185,55 @@ public class LoadWords extends Activity {
                 }
             }
 
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mClickListener.onClick(v);
+                }
+            });
+
             // Set item views based on your views and data model
             viewHolder.wordView.setText(word.getWord());
             viewHolder.definitionView.setText(word.getDefinitions().get(0));
             final String finalRecording = recording;
+
             viewHolder.pronounciation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     StorageReference storageRef = firebaseStorage.getReference();
-                    StorageReference songsRef = storageRef.child(language +'/'
-                            + finalRecording+".3gp");
+                    StorageReference audioRef = storageRef.child(language + "/" + finalRecording+".3gp");
 
                     try {
-                        File localFile  = new File(Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_DOWNLOADS), finalRecording + ".3gp");
+                        final File localFile = File.createTempFile("audio", "mp3");
+                        audioRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                MediaPlayer mediaPlayer = new MediaPlayer();
+                                try {
+                                    mediaPlayer.setDataSource(localFile.getPath());
+                                    mediaPlayer.prepare();
 
-                        localFile .createNewFile();
-                        songsRef.getFile(localFile);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
 
-                        mediaPlayer = new MediaPlayer();
-                        mediaPlayer.setDataSource(localFile.getAbsolutePath());
-                        mediaPlayer.prepare();
-                        mediaPlayer.start();
-
-                        Toast.makeText(LoadWords.this, "Recording Playing",
-                                Toast.LENGTH_SHORT).show();
+                                mediaPlayer.start();
+                                Toast.makeText(LoadWords.this, "Recording Playing",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                            }
+                        });
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+
+
                 }
             });
 
@@ -236,9 +268,50 @@ public class LoadWords extends Activity {
             super.onPostExecute(aVoid);
 
             WordAdapter adapter = new WordAdapter(words, language);
+
             mRecyclerView.setAdapter(adapter);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(LoadWords.this));
 
+            adapter.setClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int index = mRecyclerView.indexOfChild(v);
+
+                    Intent intent = new Intent(LoadWords.this, ViewWord.class);
+                    intent.putExtra("language", language);
+                    intent.putExtra("word", words.get(index).getWord());
+
+                    startActivity(intent);
+                }
+            });
         }
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent nextIntent = new Intent(getApplicationContext(),SettingsActivity.class);
+                startActivity(nextIntent);
+                return true;
+            case R.id.action_home:
+                Intent nextIntent2 = new Intent(getApplicationContext(),HomeScreenActivity.class);
+                startActivity(nextIntent2);
+                return true;
+            case R.id.action_logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(nextIntent3);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

@@ -9,16 +9,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"
         android:text="Add Word"
-        android:textColor="#ce3232"
-        android:textSize="40sp"
-        android:typeface="serif" />
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="40sp"/>
+
+
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
         <Spinner
             android:entries="@array/translateFrom"
             android:id="@+id/translateFrom"
@@ -50,6 +52,16 @@
         android:backgroundTint="@color/colorPrimaryDark"
         android:hint="Word"
         android:inputType="textPersonName" />
+
+
+
+
+
+
+
+
+
+
 
     <EditText
         android:id="@+id/definition"
@@ -86,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:paddingLeft="70dp"
         android:paddingRight="70dp"
@@ -106,7 +118,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:elevation="4dp"
             android:text="Replay"
             android:textColor="#fff" />
@@ -117,7 +129,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:elevation="4dp"
             android:text="Retry"
             android:textColor="#fff" />
@@ -128,7 +140,7 @@
         android:layout_width="356dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:paddingLeft="70dp"
         android:paddingRight="70dp"
