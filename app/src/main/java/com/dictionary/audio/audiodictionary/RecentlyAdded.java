@@ -31,23 +31,15 @@ public class RecentlyAdded extends Activity {
 
         final List<Language> languages = new ArrayList<>();
 
-        languages.add(new Language("English", "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-800.png"));
-        languages.add(new Language("French", "http://cdn.countryflags.com/thumbs/france/flag-800.png"));
-        languages.add(new Language("Spanish", "http://cdn.countryflags.com/thumbs/spain/flag-800.png"));
+        languages.add(new Language("English to French", "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-800.png"));
+        languages.add(new Language("French to English", "http://cdn.countryflags.com/thumbs/france/flag-800.png"));
+        languages.add(new Language("Spanish to English", "http://cdn.countryflags.com/thumbs/spain/flag-800.png"));
+        languages.add(new Language("English to Spanish", "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-800.png"));
+        languages.add(new Language("French to Spanish", "http://cdn.countryflags.com/thumbs/france/flag-800.png"));
+        languages.add(new Language("Spanish to French", "http://cdn.countryflags.com/thumbs/spain/flag-800.png"));
+
 
         LanguageAdapter adapter = new LanguageAdapter(languages);
-        adapter.setClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int index = mRecyclerView.indexOfChild(v);
-                Toast.makeText(RecentlyAdded.this,"Searching " + languages.get(index).getName() + " words", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(RecentlyAdded.this, LoadWords.class);
-                intent.putExtra("language", languages.get(index).getName());
-
-                startActivity(intent);
-            }
-        });
-
 
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -56,9 +48,14 @@ public class RecentlyAdded extends Activity {
 
     }
 
+    public String parseLanguage(String language) {
+        String res = language.replace(" to ", "-");
+
+        return res;
+    }
+
     public class LanguageAdapter extends
             RecyclerView.Adapter<LanguageAdapter.ViewHolder> {
-        private View.OnClickListener mClickListener;
 
         // Provide a direct reference to each of the views within a data item
         // Used to cache the views within the item layout for fast access
@@ -101,32 +98,42 @@ public class RecentlyAdded extends Activity {
             ViewHolder viewHolder = new ViewHolder(contactView);
 
 
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mClickListener.onClick(v);
-                }
-            });
-
             return viewHolder;
         }
-
-        public void setClickListener(View.OnClickListener callback) {
-            mClickListener = callback;
-        }
-
 
         // Involves populating data into the item through holder
         @Override
         public void onBindViewHolder(LanguageAdapter.ViewHolder viewHolder, int position) {
             // Get the data model based on position
-            Language language = languages.get(position);
+            final Language language = languages.get(position);
 
             // Set item views based on your views and data model
             TextView textView = viewHolder.languageTextView;
             textView.setText(language.getName());
             ImageView imageView = viewHolder.imageView;
             Picasso.with(getApplicationContext()).load(language.getFlag()).resize(1500,750).into(imageView);
+
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(RecentlyAdded.this,"Searching " + language.getName() + " words", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RecentlyAdded.this, LoadWords.class);
+                    String table = parseLanguage(language.getName());
+                    intent.putExtra("language", table);
+                    startActivity(intent);
+                }
+            });
+
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(RecentlyAdded.this,"Searching " + language.getName() + " words", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RecentlyAdded.this, LoadWords.class);
+                    String table = parseLanguage(language.getName());
+                    intent.putExtra("language", table);
+                    startActivity(intent);
+                }
+            });
         }
 
         // Returns the total count of items in the list
