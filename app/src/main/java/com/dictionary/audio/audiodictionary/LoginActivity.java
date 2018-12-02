@@ -70,23 +70,32 @@ public class LoginActivity extends Activity {
                 @Override
                 public void onClick(View view) {
                         //System.out.println("login hash: " + hash);
-                    mAuth.signInWithEmailAndPassword(mUser.getText().toString(),mPass.getText().toString())
-                            .addOnCompleteListener(LoginActivity.this,
-                                    new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                     currentUser = mAuth.getCurrentUser();
-                                    Intent initIntent = new Intent(getApplicationContext(),InitScreenActivity.class);
-                                    startActivity(initIntent);
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(LoginActivity.this,
-                                            "Authentication failed: ", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                    if (mUser == null || mUser.getText().toString().equals("")) {
+                        Toast.makeText(getApplicationContext(), "Please enter an email",
+                                Toast.LENGTH_LONG).show();
+                    }
+                    else if (mPass == null || mPass.getText().toString().equals("")) {
+                        Toast.makeText(getApplicationContext(), "Please enter a password",
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        mAuth.signInWithEmailAndPassword(mUser.getText().toString(), mPass.getText().toString())
+                                .addOnCompleteListener(LoginActivity.this,
+                                        new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                if (task.isSuccessful()) {
+                                                    // Sign in success, update UI with the signed-in user's information
+                                                    currentUser = mAuth.getCurrentUser();
+                                                    Intent initIntent = new Intent(getApplicationContext(), InitScreenActivity.class);
+                                                    startActivity(initIntent);
+                                                } else {
+                                                    // If sign in fails, display a message to the user.
+                                                    Toast.makeText(LoginActivity.this,
+                                                            "Authentication failed: ", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                    }
                 }
             });//End login code
 
@@ -104,21 +113,26 @@ public class LoginActivity extends Activity {
                         @Override
                         public void onClick(View v) {
 
-                            mAuth.sendPasswordResetEmail(forgotEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
+                            if (forgotEmail == null || forgotEmail.getText().toString().equals("")) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Please enter an email", Toast.LENGTH_LONG).show();
+                            } else {
+                                mAuth.sendPasswordResetEmail(forgotEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
 
-                                        Toast.makeText(getApplicationContext(),"Password reset email sent to: " + forgotEmail.getText().toString(),Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), "Password reset email sent to: " + forgotEmail.getText().toString(), Toast.LENGTH_LONG).show();
 
-                                    } else {
+                                        } else {
 
-                                        Toast.makeText(getApplicationContext(),"No such email exists!",Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), "No such email exists!", Toast.LENGTH_LONG).show();
 
+                                        }
                                     }
-                                }
-                            });
-                            forgotDialog.dismiss();
+                                });
+                                forgotDialog.dismiss();
+                            }
                         }
                     });
 
@@ -142,62 +156,76 @@ public class LoginActivity extends Activity {
                     signupSubmit.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if(!signupPass.getText().toString().equals(confirmPass.getText().toString())){
+                            if (signupUser == null || signupUser.getText().toString().equals("")) {
                                 Toast.makeText(getApplicationContext(),
-                                        "Passwords do not match!",Toast.LENGTH_LONG).show();
+                                        "Please enter a username",
+                                        Toast.LENGTH_LONG).show();
+                            } else if (signupEmail == null || signupEmail.getText().toString().equals("")) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Please enter an email",
+                                            Toast.LENGTH_LONG).show();
+                            } else if (signupPass == null || signupPass.getText().toString().equals("")) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Please enter a password",
+                                        Toast.LENGTH_LONG).show();
+                            } else if (confirmPass == null || confirmPass.getText().toString().equals("")) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Please re-enter password",
+                                        Toast.LENGTH_LONG).show();
                             } else {
-                                final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                final DatabaseReference accountRef = database.getReference("Users");
-                                String cleanedEmail = signupEmail.getText().toString().replaceAll("(\\.)", ",");
+                                if (!signupPass.getText().toString().equals(confirmPass.getText().toString())) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Passwords do not match!", Toast.LENGTH_LONG).show();
+                                } else {
+                                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    final DatabaseReference accountRef = database.getReference("Users");
+                                    String cleanedEmail = signupEmail.getText().toString().replaceAll("(\\.)", ",");
 
-                                //TODO check for prexisting accounts and other edge cases.
-                                mAuth.createUserWithEmailAndPassword(signupEmail.getText().toString(), signupPass.getText().toString())
-                                        .addOnCompleteListener(LoginActivity.this,
-                                                new OnCompleteListener<AuthResult>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                    //TODO check for prexisting accounts and other edge cases.
+                                    mAuth.createUserWithEmailAndPassword(signupEmail.getText().toString(), signupPass.getText().toString())
+                                            .addOnCompleteListener(LoginActivity.this,
+                                                    new OnCompleteListener<AuthResult>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                                        if (task.isSuccessful()) {
+                                                            if (task.isSuccessful()) {
 
-                                                            Toast.makeText(getApplicationContext(), "Signup successful!",
-                                                                    Toast.LENGTH_LONG).show();
-                                                            mAuth.signInWithEmailAndPassword(signupEmail.getText().toString(),signupPass.getText().toString())
-                                                                    .addOnCompleteListener(LoginActivity.this,
-                                                                            new OnCompleteListener<AuthResult>() {
-                                                                                @Override
-                                                                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                                                                    if (task.isSuccessful()) {
-                                                                                        // Sign in success, update UI with the signed-in user's information
-                                                                                        currentUser = mAuth.getCurrentUser();
-                                                                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                                                                                .setDisplayName(signupUser.getText().toString()).build();
-                                                                                        currentUser.updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                                            @Override
-                                                                                            public void onSuccess(Void aVoid) {
-                                                                                                System.out.println(currentUser.getDisplayName());
-                                                                                                System.out.println(currentUser.getUid());
-                                                                                                Intent initIntent = new Intent(getApplicationContext(),InitScreenActivity.class);
-                                                                                                final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                                                                                final DatabaseReference accountRef = database.getReference("Favorites");
-                                                                                                HashMap<String,String> map = new HashMap<>();
-                                                                                                map.put("hello","world");
-                                                                                                accountRef.child(currentUser.getUid().toString()).setValue(map);
-                                                                                                startActivity(initIntent);
-                                                                                            }
-                                                                                        });
+                                                                Toast.makeText(getApplicationContext(), "Signup successful!",
+                                                                        Toast.LENGTH_LONG).show();
+                                                                mAuth.signInWithEmailAndPassword(signupEmail.getText().toString(), signupPass.getText().toString())
+                                                                        .addOnCompleteListener(LoginActivity.this,
+                                                                                new OnCompleteListener<AuthResult>() {
+                                                                                    @Override
+                                                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                                        if (task.isSuccessful()) {
+                                                                                            // Sign in success, update UI with the signed-in user's information
+                                                                                            currentUser = mAuth.getCurrentUser();
+                                                                                            System.out.println("is current user null? " + currentUser == null);
+                                                                                            System.out.println(currentUser.getUid());
+                                                                                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                                                                    .setDisplayName(signupUser.getText().toString()).build();
+                                                                                            currentUser.updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                                @Override
+                                                                                                public void onSuccess(Void aVoid) {
+                                                                                                    System.out.println(currentUser.getDisplayName());
+                                                                                                    Intent initIntent = new Intent(getApplicationContext(), InitScreenActivity.class);
+                                                                                                    startActivity(initIntent);
+                                                                                                }
+                                                                                            });
 
+                                                                                        }
                                                                                     }
-                                                                                }
-                                                                            });
-                                                        } else {
+                                                                                });
+                                                            } else {
 
-                                                            Toast.makeText(getApplication(), "Signup failed!", Toast.LENGTH_LONG).show();
+                                                                Toast.makeText(getApplication(), "Signup failed!", Toast.LENGTH_LONG).show();
 
+                                                            }
                                                         }
-                                                    }
-                                                });
+                                                    });
 
-                                signupDialog.dismiss();
+                                    signupDialog.dismiss();
+                                }
                             }
                         }
                     });

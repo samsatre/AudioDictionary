@@ -64,6 +64,7 @@ public class ViewWord extends ListActivity {
 
         List a = new ArrayList();
         List<String> sentences = dataSnapshot.child(word).getValue(Word.class).getSentences();
+        String uid =  dataSnapshot.child(word).getValue(Word.class).getUid();
         List<String> definitions = dataSnapshot.child(word).getValue(Word.class).getDefinitions();
         List<Pair<String, Integer>> recordings = dataSnapshot.child(word).getValue(Word.class).getRecordings();
         //Word my_word = new Word("1",word,sentences,recordings,definitions);
@@ -75,7 +76,7 @@ public class ViewWord extends ListActivity {
             //items.add(new Item(s,(int)recordings.get("rec".concat(Integer.toString(i))),definitions.get(i)));
             Pair<String, Integer> pair = recordings.get(i);
             String def = definitions.get(i);
-            items.add(new Item(s, i, pair.getSecond(),def, pair.getFirst()));
+            items.add(new Item(s, i, pair.getSecond(),def, pair.getFirst(), uid));
             i++;
         }
 
