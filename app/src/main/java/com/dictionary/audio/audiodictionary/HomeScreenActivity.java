@@ -52,6 +52,7 @@ public class HomeScreenActivity extends Activity {
         addWordButton = findViewById(R.id.contributeButton);
         searchButton = findViewById(R.id.searchButton);
         recentButton = findViewById(R.id.recentButton);
+        randomButton = findViewById(R.id.randButton);
 
         //stat_msg = findViewById(R.id.statText);
 
@@ -98,7 +99,7 @@ public class HomeScreenActivity extends Activity {
         });
 
 
-        randomButton = findViewById(R.id.randButton);
+
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -5,7 +5,7 @@
     <string name="recordWord">Record Word</string>
     <string name="addSentence">Sentence with Word</string>
     <string name="chooseLearn">Language to Learn</string>
-    <string name="choosePreferred">Native Language</string>
+    <string name="choosePreferred">Preferred Language</string>
     <string name="record_start">Start Recording Audio</string>
     <string name="record_stop">Stop Recording Audio</string>
     <string name="login_forgot"> <u>Forgot your password?</u> </string>
@@ -13,15 +13,15 @@
     <string name="translated">Translation</string>
     <string name="Play">Play Audio</string>
     <string name="sentence1">sentence</string>
-    <string name="queryInNative">Word in Native Language</string>
+    <string name="queryInNative">Word in Preferred Language</string>
     <string name="queryInLearning">Word in Learning Language</string>
     <string name="searchTitle">Search for Word</string>
     <string name="noResults">No Results Found</string>
     <string name="SignUp">"Don't have an account? Sign up here!"</string>
-    <string name="choose1">Choose your native language:</string>
+    <string name="choose1">Choose your preferred language:</string>
     <string name="choose2">Choose a language to learn:</string>
 
-    <string name="native_lang">Native Language:</string>
+    <string name="native_lang">Preferred Language:</string>
     <string name="learning_lang">Language to Learn:</string>
     <string name="add_word_button">Add More Words</string>
     <string name="search_button">Search New Words</string>
