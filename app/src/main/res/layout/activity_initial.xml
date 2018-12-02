@@ -16,7 +16,7 @@
         />
 
     <Spinner
-        android:id="@+id/initialSpinnerLearn"
+        android:id="@+id/initialSpinnerPreferred"
         android:layout_below="@id/initPrefText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,14 +24,12 @@
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
         android:layout_marginTop="10dp"
-        android:entries="@array/learnArray"
-        android:prompt="@string/chooseLearn"
+        android:entries="@array/preferArray"
         />
 
 
     <TextView
         android:id="@+id/initLearnText"
-        android:layout_below="@id/initialSpinnerLearn"
         android:text="Choose language you are learning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +41,7 @@
 
 
     <Spinner
-        android:id="@+id/initialSpinnerPreferred"
+        android:id="@+id/initialSpinnerLearn"
         android:layout_below="@+id/initLearnText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,8 +49,7 @@
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
         android:layout_marginTop="10dp"
-        android:entries="@array/preferArray"
-        android:prompt="@string/choosePreferred"
+        android:entries="@array/learnArray"
         />
 
 
