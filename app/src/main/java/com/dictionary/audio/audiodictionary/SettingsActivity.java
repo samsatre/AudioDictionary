@@ -9,13 +9,25 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SettingsActivity extends Activity {
+
+    Button mSaveBtn;
+    Button mSavePref;
+    Button mSaveLearn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        mSaveBtn = findViewById(R.id.settings_save_button);
+        mSavePref = findViewById(R.id.settings_prefer_btn);
+
+
+
 
     }
 
@@ -37,7 +49,7 @@ public class SettingsActivity extends Activity {
                 startActivity(nextIntent2);
                 return true;
             case R.id.action_logout:
-                // TODO- actually log out
+                FirebaseAuth.getInstance().signOut();
                 Intent nextIntent3 = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(nextIntent3);
                 return true;

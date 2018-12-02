@@ -14,20 +14,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="71dp"
-            android:layout_alignTop="@+id/nativeSpinner"
-            android:text="@string/native_lang"
-            android:textSize="20sp"
-            />
+            android:layout_marginTop="52dp"
+            android:text="Preferred Language"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/learnText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/nativeSpinner"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="186dp"
+            android:layout_marginTop="158dp"
             android:text="@string/learning_lang"
             android:textSize="20sp" />
 
@@ -35,53 +32,104 @@
             android:id="@+id/usernameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/nativeSpinner"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="286dp"
-            android:text="@string/username_txt"
+            android:layout_marginTop="280dp"
+            android:text="Change Username:"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/oldPasswordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="223dp"
+            android:text="Old Password:"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editOldPasswordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="178dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:text="password" />
 
         <TextView
             android:id="@+id/passwordText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/nativeSpinner"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="371dp"
-            android:text="@string/password_txt"
+            android:layout_marginBottom="145dp"
+            android:text="New Password:"
             android:textSize="20sp" />
 
-        <Spinner
-            android:id="@+id/nativeSpinner"
-            android:layout_width="255dp"
+        <RelativeLayout
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="65dp"
-            android:layout_marginTop="117dp"
-            android:entries="@array/preferArray"
-            android:prompt="@string/choosePreferred"/>
 
-        <Spinner
-            android:id="@+id/learnSpinner"
-            android:layout_width="255dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="89dp">
+
+            <Spinner
+                android:id="@+id/nativeSpinner"
+                android:layout_width="255dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:entries="@array/preferArray"
+                android:prompt="@string/choosePreferred" />
+
+            <Button
+                android:id="@+id/settings_prefer_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/colorPrimaryDark"
+                android:text="Save"
+                android:textColor="#fff" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="65dp"
-            android:layout_marginTop="233dp"
-            android:entries="@array/learnArray"
-            android:prompt="@string/chooseLearn" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="197dp">
 
+            <Spinner
+                android:id="@+id/learnSpinner"
+                android:layout_width="255dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:entries="@array/learnArray"
+                android:prompt="@string/chooseLearn" />
+
+            <Button
+                android:id="@+id/settings_learn_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/colorPrimaryDark"
+                android:text="Save"
+                android:textColor="#fff" />
+        </RelativeLayout>
         <EditText
             android:id="@+id/editUsernameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="158dp"
+            android:layout_marginBottom="256dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Username" />
@@ -92,24 +140,20 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="79dp"
+            android:layout_marginBottom="100dp"
             android:ems="10"
             android:inputType="textPassword"
-            android:text="password"/>
-
+            android:text="password" />
         <Button
-            android:id="@+id/button"
+            android:id="@+id/settings_save_button"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp"
-            android:text="@string/save"
-
+            android:text="Change Account Details"
             android:background="@color/colorPrimaryDark"
             android:layout_width="250dp"
             android:elevation="4dp"
             android:textColor="#fff"/>
-
-
     </RelativeLayout>
 </ScrollView>
