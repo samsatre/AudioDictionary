@@ -30,7 +30,7 @@
         android:focusable="false"
         android:focusedByDefault="false"
         android:inputType="textAutoComplete"
-        android:queryHint="@string/queryInNative" />
+        android:queryHint="@string/queryInLearning" />
     <!--
     <SearchView
         android:id="@+id/learningSearch"
