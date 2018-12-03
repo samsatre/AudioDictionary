@@ -69,19 +69,32 @@ public class SettingsActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                mEdit.putString(STATE_PREFERRED,preferSpin.getSelectedItem().toString());
-                mEdit.commit();
-                Toast.makeText(getApplicationContext(),"Preferred language saved!",Toast.LENGTH_LONG).show();
+                if(preferSpin.getSelectedItem().toString().equals(mSp.getString(STATE_LEARN,"not found learn"))){
+
+                    Toast.makeText(getApplicationContext(),"Preferred language cannot be the same as learning language!",Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    mEdit.putString(STATE_PREFERRED, preferSpin.getSelectedItem().toString());
+                    mEdit.commit();
+                    Toast.makeText(getApplicationContext(), "Preferred language saved!", Toast.LENGTH_LONG).show();
+                }
 
             }
         });
         mSaveLearn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(learnSpin.getSelectedItem().toString().equals(mSp.getString(STATE_PREFERRED,"not found preferred"))){
 
-                mEdit.putString(STATE_LEARN,learnSpin.getSelectedItem().toString());
-                mEdit.commit();
-                Toast.makeText(getApplicationContext(),"Language to learn saved!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Learning language cannot be the same as preferred language!",Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    mEdit.putString(STATE_LEARN, learnSpin.getSelectedItem().toString());
+                    mEdit.commit();
+                    Toast.makeText(getApplicationContext(), "Language to learn saved!", Toast.LENGTH_LONG).show();
+                }
 
 
             }
@@ -128,8 +141,6 @@ public class SettingsActivity extends Activity {
                                         }
                                     }
                                 });
-
-
             }
         });
 

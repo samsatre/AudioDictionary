@@ -97,7 +97,15 @@ public class SearchActivity extends Activity {
             nativeSearch.setQuery(search, true);
             language =  preferredSpinner.getSelectedItem().toString() + "-"
                     + learningSpinner.getSelectedItem().toString();
-            querySearched(search, language);
+            if(preferredSpinner.getSelectedItem().toString().equals(learningSpinner.getSelectedItem().toString())){
+
+                Toast.makeText(getApplicationContext(),"Please choose a different preferred and learning language!",Toast.LENGTH_LONG).show();
+
+            } else {
+
+                querySearched(search, language);
+
+            }
         }
 
         nativeSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -106,7 +114,13 @@ public class SearchActivity extends Activity {
                 nativeSearch.clearFocus();
                 language = preferredSpinner.getSelectedItem().toString() + "-"
                         + learningSpinner.getSelectedItem().toString();
-                querySearched(s, language);
+                if(preferredSpinner.getSelectedItem().toString().equals(learningSpinner.getSelectedItem().toString())){
+
+                    Toast.makeText(getApplicationContext(),"Please choose a different preferred and learning language!",Toast.LENGTH_LONG).show();
+                    return false;
+                } else {
+                    querySearched(s, language);
+                }
                 return true;
             }
 
