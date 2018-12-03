@@ -125,12 +125,18 @@ public class HomeScreenActivity extends Activity {
 
                         }
 
-                        Random r = new Random();
-                        Word chosen = mWords.get((Math.abs(r.nextInt()) % mWords.size()));
-                        Intent viewWord = new Intent(getApplicationContext(),ViewWord.class);
-                        viewWord.putExtra("language",language);
-                        viewWord.putExtra("word",chosen.getWord());
-                        startActivity(viewWord);
+                        if (mWords.size() == 0) {
+                            Toast.makeText(getApplicationContext(),
+                                    "There are no words for " + language,
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            Random r = new Random();
+                            Word chosen = mWords.get((Math.abs(r.nextInt()) % mWords.size()));
+                            Intent viewWord = new Intent(getApplicationContext(), ViewWord.class);
+                            viewWord.putExtra("language", language);
+                            viewWord.putExtra("word", chosen.getWord());
+                            startActivity(viewWord);
+                        }
                     }
 
                     @Override
