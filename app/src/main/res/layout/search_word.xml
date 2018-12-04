@@ -30,7 +30,7 @@
         android:focusable="false"
         android:focusedByDefault="false"
         android:inputType="textAutoComplete"
-        android:queryHint="@string/queryInNative" />
+        android:queryHint="@string/queryInLearning" />
     <!--
     <SearchView
         android:id="@+id/learningSearch"
@@ -106,7 +106,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:entries="@array/translateFrom"></Spinner>
+            android:entries="@array/translateTo"></Spinner>
     </LinearLayout>
 
 

@@ -235,6 +235,11 @@ public class AddWord extends Activity {
                             Toast.LENGTH_LONG).show();
                 } else {
                     addNewRow = true;
+                    if(translateFrom.getSelectedItem().toString().equals(translateTo.getSelectedItem().toString())){
+
+                        Toast.makeText(getApplicationContext(),"Make sure you two different languages are selected!",Toast.LENGTH_LONG).show();
+
+                    }else{
                     language = translateFrom.getSelectedItem().toString() + "-" + translateTo.getSelectedItem().toString();
                     StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -303,8 +308,10 @@ public class AddWord extends Activity {
                         }
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {  }
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
                     });
+                }
                 }
             }
         });

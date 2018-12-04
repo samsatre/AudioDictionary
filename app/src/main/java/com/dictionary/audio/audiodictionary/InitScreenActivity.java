@@ -74,16 +74,23 @@ public class InitScreenActivity extends Activity {
                         }
 
                     } else {
-                        //Save user choices
-                        mEdit.putString(STATE_LEARN, mLearnSpin.getSelectedItem().toString());
-                        mEdit.putString(STATE_PREFERRED,mPreferSpin.getSelectedItem().toString());
+
+                        if (mPreferSpin.getSelectedItem().toString().equals(mLearnSpin.getSelectedItem().toString())) {
+
+                            Toast.makeText(getApplicationContext(), "Please choose a different preferred and learning language!", Toast.LENGTH_LONG).show();
+
+                        } else{
+                            //Save user choices
+                            mEdit.putString(STATE_LEARN, mLearnSpin.getSelectedItem().toString());
+                        mEdit.putString(STATE_PREFERRED, mPreferSpin.getSelectedItem().toString());
 
                         mEdit.commit();
                         //From here we will go to the next activity.
-                        Intent nextIntent = new Intent(getApplicationContext(),HomeScreenActivity.class);
+                        Intent nextIntent = new Intent(getApplicationContext(), HomeScreenActivity.class);
                         nextIntent.putExtra(STATE_LEARN, mLearnSpin.getSelectedItem().toString());
-                        nextIntent.putExtra(STATE_PREFERRED,mPreferSpin.getSelectedItem().toString());
+                        nextIntent.putExtra(STATE_PREFERRED, mPreferSpin.getSelectedItem().toString());
                         startActivity(nextIntent);
+                        }
                     }
                 }
             });

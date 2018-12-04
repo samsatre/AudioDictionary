@@ -104,8 +104,9 @@ public class HomeScreenActivity extends Activity {
             @Override
             public void onClick(View view) {
                 System.out.println("in random on click");
-                String language = mSp.getString(STATE_PREFERRED,"not found")+"-"
-                        +mSp.getString(STATE_LEARN,"not found2");
+                String language = mSp.getString(STATE_LEARN,"not found")+"-"
+                        +mSp.getString(STATE_PREFERRED,"not found2");
+                ArrayList<Word> mWords = new ArrayList<Word>();
                 System.out.println("in random, database name: " + language);
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 final DatabaseReference words = database.getReference(language);
@@ -114,8 +115,8 @@ public class HomeScreenActivity extends Activity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         System.out.println("Inside onDataChange");
-                        String language = mSp.getString(STATE_PREFERRED,"not found")+"-"
-                                +mSp.getString(STATE_LEARN,"not found2");
+                        String language = mSp.getString(STATE_LEARN,"not found")+"-"
+                                +mSp.getString(STATE_PREFERRED,"not found2");
                         ArrayList<Word> mWords = new ArrayList<Word>();
                         Iterator<DataSnapshot> children = dataSnapshot.getChildren().iterator();
 
@@ -125,12 +126,18 @@ public class HomeScreenActivity extends Activity {
 
                         }
 
-                        Random r = new Random();
-                        Word chosen = mWords.get((Math.abs(r.nextInt()) % mWords.size()));
-                        Intent viewWord = new Intent(getApplicationContext(),ViewWord.class);
-                        viewWord.putExtra("language",language);
-                        viewWord.putExtra("word",chosen.getWord());
-                        startActivity(viewWord);
+                        if (mWords.size() == 0) {
+                            Toast.makeText(getApplicationContext(),
+                                    "There are no words for " + language,
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            Random r = new Random();
+                            Word chosen = mWords.get((Math.abs(r.nextInt()) % mWords.size()));
+                            Intent viewWord = new Intent(getApplicationContext(), ViewWord.class);
+                            viewWord.putExtra("language", language);
+                            viewWord.putExtra("word", chosen.getWord());
+                            startActivity(viewWord);
+                        }
                     }
 
                     @Override
