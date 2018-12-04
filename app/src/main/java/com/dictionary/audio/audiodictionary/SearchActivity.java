@@ -83,8 +83,8 @@ public class SearchActivity extends Activity {
         mEdit = mSp.edit();
         nativeLanguage = mSp.getString(STATE_PREFERRED,"not found prefer");
         learningLanguage = mSp.getString(STATE_LEARN,"not found learn");
-        learningSpinner.setSelection(getIndex(learningSpinner,learningLanguage));
-        preferredSpinner.setSelection(getIndex(preferredSpinner,nativeLanguage));
+        learningSpinner.setSelection(getIndex(learningSpinner, nativeLanguage));
+        preferredSpinner.setSelection(getIndex(preferredSpinner,learningLanguage));
 
 
         firebaseDatabase = FirebaseDatabase.getInstance();
