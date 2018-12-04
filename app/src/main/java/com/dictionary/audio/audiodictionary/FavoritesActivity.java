@@ -212,21 +212,13 @@ class FavoritesAdapter extends BaseAdapter {
         ViewHolder holder;
        final ViewGroup finalView = parent;
         final FavoritesActivity.MyWord curr = list.get(position);
-        if(convertView == null){
-
             holder = new ViewHolder();
             //TODO edit layout file to match theme
-            tempView = inflater.inflate(R.layout.favorites_list_view,parent,false);
-            holder.word = tempView.findViewById(R.id.favorite_word);
-            holder.description = tempView.findViewById(R.id.favorite_description);
-            holder.remove = tempView.findViewById(R.id.remove_button);
-            tempView.setTag(holder);
-
-        } else {
-
-            holder = (ViewHolder) tempView.getTag();
-
-        }
+            convertView = inflater.inflate(R.layout.favorites_list_view,parent,false);
+            holder.word = convertView.findViewById(R.id.favorite_word);
+            holder.description = convertView.findViewById(R.id.favorite_description);
+            holder.remove = convertView.findViewById(R.id.remove_button);
+            convertView.setTag(holder);
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -248,7 +240,7 @@ class FavoritesAdapter extends BaseAdapter {
             holder.description.setText(holder.description.getText().toString() + curr.getDefinitions().get(0));
         }
 
-        return tempView;
+        return convertView;
 
     }
 

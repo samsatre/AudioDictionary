@@ -115,6 +115,7 @@ public class RecentlyAdded extends Activity {
             TextView textView = viewHolder.languageTextView;
             textView.setText(language.getName());
             ImageView imageView = viewHolder.imageView;
+            Picasso.with(getApplicationContext()).setLoggingEnabled(true);
             Picasso.with(getApplicationContext()).load(language.getFlag()).resize(400,200).into(imageView);
 
             imageView.setOnClickListener(new View.OnClickListener() {
